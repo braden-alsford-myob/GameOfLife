@@ -15,32 +15,32 @@ namespace GameOfLife.Business
         
         public int GetActiveNeighbourCount(CellPosition cellPosition)
         {
-            var neighbourCellLocations = _getNeighbourLocations(cellPosition);
+            var neighbourCellLocations = _getNeighbouringCellPositions(cellPosition);
             return neighbourCellLocations.Count(_cellIsActive);
         }
 
-        private List<CellPosition> _getNeighbourLocations(CellPosition cellPosition)
+        private List<CellPosition> _getNeighbouringCellPositions(CellPosition cellPosition)
         {
-            var aboveRowIndex = _getAboveRowIndex(cellPosition.Row);
-            var currentRowIndex = cellPosition.Row;
-            var belowRowIndex = _getBelowRowIndex(cellPosition.Row);
+            var aboveRow = _getAboveRowIndex(cellPosition.Row);
+            var currentRow = cellPosition.Row;
+            var belowRow = _getBelowRowIndex(cellPosition.Row);
             
-            var leftColumnIndex = _getLeftColumnIndex(cellPosition);
-            var currentColumnIndex = cellPosition.Column;
-            var rightColumnIndex = _getRightColumnIndex(cellPosition);
+            var leftColumn = _getLeftColumnIndex(cellPosition);
+            var currentColumn = cellPosition.Column;
+            var rightColumn = _getRightColumnIndex(cellPosition);
             
             return new List<CellPosition>
             {
-                new CellPosition(aboveRowIndex, leftColumnIndex),
-                new CellPosition(aboveRowIndex, currentColumnIndex),
-                new CellPosition(aboveRowIndex, rightColumnIndex),
+                new CellPosition(aboveRow, leftColumn),
+                new CellPosition(aboveRow, currentColumn),
+                new CellPosition(aboveRow, rightColumn),
                 
-                new CellPosition(currentRowIndex, leftColumnIndex),
-                new CellPosition(currentRowIndex, rightColumnIndex),
+                new CellPosition(currentRow, leftColumn),
+                new CellPosition(currentRow, rightColumn),
                 
-                new CellPosition(belowRowIndex, leftColumnIndex),
-                new CellPosition(belowRowIndex, currentColumnIndex),
-                new CellPosition(belowRowIndex, rightColumnIndex)
+                new CellPosition(belowRow, leftColumn),
+                new CellPosition(belowRow, currentColumn),
+                new CellPosition(belowRow, rightColumn)
             };
         }
 
