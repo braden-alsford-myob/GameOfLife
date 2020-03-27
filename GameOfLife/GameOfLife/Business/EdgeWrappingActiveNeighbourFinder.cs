@@ -6,9 +6,9 @@ namespace GameOfLife.Business
 {
     public class EdgeWrappingActiveNeighbourFinder
     {
-        private List<List<Cell>> _grid;
-
-        public EdgeWrappingActiveNeighbourFinder(List<List<Cell>> grid)
+        private IReadOnlyList<IReadOnlyList<Cell>> _grid;
+        
+        public EdgeWrappingActiveNeighbourFinder(IReadOnlyList<IReadOnlyList<Cell>> grid)
         {
             _grid = grid;
         }

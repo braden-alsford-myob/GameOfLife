@@ -10,22 +10,22 @@ namespace GameOfLife.Business
         private readonly CellState _resultantState;
         private readonly HashSet<int> _requiredActiveNeighbourCounts;
 
-        public Rule(HashSet<CellState> requiredInitialStates, CellState resultantState, HashSet<int> requiredActiveNeighbourCounts)
+        public Rule(HashSet<CellState> requiredInitialStates, HashSet<int> requiredActiveNeighbourCounts,
+            CellState resultantState)
         {
             _validateRule(requiredInitialStates, requiredActiveNeighbourCounts);
             
             _requiredInitialStates = requiredInitialStates;
-            _resultantState = resultantState;
             _requiredActiveNeighbourCounts = requiredActiveNeighbourCounts;
-            
+            _resultantState = resultantState;
         }
 
         public CellState GetNextCellState(int activeNeighbourCount, CellState initialState)
         {
-            return _matchesRuleRequirements(activeNeighbourCount, initialState) ? _resultantState : initialState;
+            return _meetsRequirements(activeNeighbourCount, initialState) ? _resultantState : initialState;
         }
 
-        private bool _matchesRuleRequirements(int activeNeighbourCount, CellState initialState)
+        private bool _meetsRequirements(int activeNeighbourCount, CellState initialState)
         {
             return _requiredActiveNeighbourCounts.Contains(activeNeighbourCount) && 
                    _requiredInitialStates.Contains(initialState);

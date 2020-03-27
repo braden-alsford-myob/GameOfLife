@@ -9,21 +9,14 @@ namespace GameOfLifeTests
     public class RuleTests
     {
 
-        private Rule _killAllCellsRule;
         private Rule _overcrowdingRule;
         
         [SetUp]
         public void Setup()
         {
-            _killAllCellsRule = new Rule(
-                new HashSet<CellState>{CellState.Alive, CellState.Dead},
-                CellState.Dead,
-                new HashSet<int> {0, 1, 2, 3, 4, 5, 6, 7, 8});            
-            
             _overcrowdingRule = new Rule(
                 new HashSet<CellState>{CellState.Alive},
-                CellState.Dead,
-                new HashSet<int> {4, 5, 6, 7, 8});
+                new HashSet<int> {4, 5, 6, 7, 8}, CellState.Dead);
         }
 
         [Test]
@@ -34,8 +27,7 @@ namespace GameOfLifeTests
             {
                 var invalidRule = new Rule(
                     new HashSet<CellState>(),
-                    CellState.Dead,
-                    new HashSet<int> {1, 2, 3, 4, 5, 6, 7, 8});
+                    new HashSet<int> {1, 2, 3, 4, 5, 6, 7, 8}, CellState.Dead);
             }
             
             Assert.Throws(typeof(RuleInvalidException), CheckFunction);
@@ -49,8 +41,7 @@ namespace GameOfLifeTests
             {
                 var invalidRule = new Rule(
                     new HashSet<CellState>{CellState.Alive},
-                    CellState.Dead,
-                    new HashSet<int> {-9});
+                    new HashSet<int> {-9}, CellState.Dead);
             }
             
             Assert.Throws(typeof(RuleInvalidException), CheckFunction);
@@ -64,19 +55,12 @@ namespace GameOfLifeTests
             {
                 var invalidRule = new Rule(
                     new HashSet<CellState>{CellState.Alive},
-                    CellState.Dead,
-                    new HashSet<int> {9});
+                    new HashSet<int> {9}, CellState.Dead);
             }
             
             Assert.Throws(typeof(RuleInvalidException), CheckFunction);
         }
-        
-        [Test]
-        public void It_Should_Return_Dead_Given_A_Rule_That_Kills_All_Cells()
-        {
-            Assert.AreEqual(CellState.Dead, _killAllCellsRule.GetNextCellState(1, CellState.Alive));
-        }
-        
+
         [Test]
         public void It_Should_Return_Dead_Given_OvercrowdingRule_With_Alive_Overcrowded_Cell()
         {
