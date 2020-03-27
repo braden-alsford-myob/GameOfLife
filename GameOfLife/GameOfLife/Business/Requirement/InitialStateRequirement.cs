@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using GameOfLife.Business.Cell;
 
 namespace GameOfLife.Business.Requirement
@@ -12,7 +13,7 @@ namespace GameOfLife.Business.Requirement
             _initialStates = initialStates;
         }
 
-        public bool HasMet(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
+        public bool HasMet(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
         {
             var centerCell = concernedCells[1][1];
             return _initialStates.Contains(centerCell.GetState());

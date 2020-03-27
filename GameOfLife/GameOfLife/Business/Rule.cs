@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirement;
@@ -16,7 +17,7 @@ namespace GameOfLife.Business
             _resultantState = resultantState;
         }
 
-        public CellState GetNextCellState(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
+        public CellState GetNextCellState(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
         {
             var initialState = concernedCells[1][1].GetState();
             return _requirements.All(requirement => requirement.HasMet(concernedCells)) ? _resultantState : initialState;

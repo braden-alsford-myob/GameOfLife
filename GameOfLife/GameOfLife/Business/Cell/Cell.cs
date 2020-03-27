@@ -23,5 +23,10 @@ namespace GameOfLife.Business.Cell
         {
             return _state;
         }
+
+        public ReadOnlyCell GetReadOnlyVersion()
+        {
+            return new ReadOnlyCell(_state);
+        }
     }
 }

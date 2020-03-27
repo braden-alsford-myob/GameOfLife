@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Exceptions;
-using GameOfLife.Business.Requirement;
 
-namespace GameOfLife.Business
+namespace GameOfLife.Business.Requirement
 {
     public class ActiveNeighbourRequirement : IRequirement
     {
@@ -16,14 +16,14 @@ namespace GameOfLife.Business
             _activeNeighbourCounts = activeNeighbourCounts;
         }
 
-        public bool HasMet(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
+        public bool HasMet(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
         {
             var neighbouringCells = GetNeighbouringCells(concernedCells);
             var activeNeighbourCount = CalculateActiveNeighbours(neighbouringCells);
             return _activeNeighbourCounts.Contains(activeNeighbourCount);
         }
         
-        private static IEnumerable<ICell> GetNeighbouringCells(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
+        private static IEnumerable<ICell> GetNeighbouringCells(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
         {
             var neighbouringCells = new List<ICell>();
             neighbouringCells.AddRange(concernedCells[0]);   // Top Row
