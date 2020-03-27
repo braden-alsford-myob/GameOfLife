@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.Business.Cell;
 using GameOfLife.Business.Exceptions;
+using GameOfLife.Business.Requirement;
 
 namespace GameOfLife.Business
 {
@@ -14,16 +16,16 @@ namespace GameOfLife.Business
             _activeNeighbourCounts = activeNeighbourCounts;
         }
 
-        public bool Met(IReadOnlyList<IReadOnlyList<Cell>> concernedCells)
+        public bool HasMet(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
         {
             var neighbouringCells = GetNeighbouringCells(concernedCells);
             var activeNeighbourCount = CalculateActiveNeighbours(neighbouringCells);
             return _activeNeighbourCounts.Contains(activeNeighbourCount);
         }
         
-        private static IEnumerable<Cell> GetNeighbouringCells(IReadOnlyList<IReadOnlyList<Cell>> concernedCells)
+        private static IEnumerable<ICell> GetNeighbouringCells(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
         {
-            var neighbouringCells = new List<Cell>();
+            var neighbouringCells = new List<ICell>();
             neighbouringCells.AddRange(concernedCells[0]);   // Top Row
             neighbouringCells.Add(concernedCells[1][0]);     // Middle Left
             neighbouringCells.Add(concernedCells[1][2]);     // Middle Right
@@ -32,7 +34,7 @@ namespace GameOfLife.Business
             return neighbouringCells;
         }
 
-        private static int CalculateActiveNeighbours(IEnumerable<Cell> neighbouringCells)
+        private static int CalculateActiveNeighbours(IEnumerable<ICell> neighbouringCells)
         {
             return neighbouringCells.Count(cell => cell.GetState() == CellState.Alive);
         }

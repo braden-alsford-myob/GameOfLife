@@ -1,8 +1,6 @@
-using GameOfLife.Business;
-
-namespace GameOfLife
+namespace GameOfLife.Business.Cell
 {
-    public class Cell
+    public class Cell : ICell
     {
         private CellState _state;
 

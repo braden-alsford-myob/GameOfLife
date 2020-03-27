@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameOfLife;
 using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using NUnit.Framework;
 
 namespace GameOfLifeTests

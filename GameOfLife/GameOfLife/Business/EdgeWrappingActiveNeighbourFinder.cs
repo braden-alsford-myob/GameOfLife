@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using GameOfLife.Business.Cell;
 
 namespace GameOfLife.Business
 {
     public class EdgeWrappingActiveNeighbourFinder
     {
-        private IReadOnlyList<IReadOnlyList<Cell>> _grid;
+        private IReadOnlyList<IReadOnlyList<ICell>> _grid;
         
-        public EdgeWrappingActiveNeighbourFinder(IReadOnlyList<IReadOnlyList<Cell>> grid)
+        public EdgeWrappingActiveNeighbourFinder(IReadOnlyList<IReadOnlyList<ICell>> grid)
         {
             _grid = grid;
         }

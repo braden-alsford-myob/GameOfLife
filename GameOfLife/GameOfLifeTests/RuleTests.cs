@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using GameOfLife;
 using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using GameOfLife.Business.Exceptions;
+using GameOfLife.Business.Requirement;
 using NUnit.Framework;
 using Rule = GameOfLife.Business.Rule;
 
@@ -25,12 +27,7 @@ namespace GameOfLifeTests
 
             for (var i = 0; i < 3; i++)
             {
-                _grid.Add(new List<Cell>
-                            {
-                                new Cell(),
-                                new Cell(),
-                                new Cell()
-                            });
+                _grid.Add(new List<Cell> {new Cell(), new Cell(), new Cell()});
             }
             
         }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameOfLife.Business.Exceptions;
+using GameOfLife.Business.Cell;
+using GameOfLife.Business.Requirement;
 
 namespace GameOfLife.Business
 {
@@ -15,10 +16,10 @@ namespace GameOfLife.Business
             _resultantState = resultantState;
         }
 
-        public CellState GetNextCellState(IReadOnlyList<IReadOnlyList<Cell>> concernedCells)
+        public CellState GetNextCellState(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
         {
             var initialState = concernedCells[1][1].GetState();
-            return _requirements.All(requirement => requirement.Met(concernedCells)) ? _resultantState : initialState;
+            return _requirements.All(requirement => requirement.HasMet(concernedCells)) ? _resultantState : initialState;
         }
     }
 }

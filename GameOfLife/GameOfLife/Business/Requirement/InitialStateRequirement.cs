@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using GameOfLife.Business.Exceptions;
+using GameOfLife.Business.Cell;
 
-namespace GameOfLife.Business
+namespace GameOfLife.Business.Requirement
 {
     public class InitialStateRequirement : IRequirement
     {
@@ -12,7 +12,7 @@ namespace GameOfLife.Business
             _initialStates = initialStates;
         }
 
-        public bool Met(IReadOnlyList<IReadOnlyList<Cell>> concernedCells)
+        public bool HasMet(IReadOnlyList<IReadOnlyList<ICell>> concernedCells)
         {
             var centerCell = concernedCells[1][1];
             return _initialStates.Contains(centerCell.GetState());
