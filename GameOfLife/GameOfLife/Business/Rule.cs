@@ -5,40 +5,20 @@ using GameOfLife.Business.Exceptions;
 namespace GameOfLife.Business
 {
     public class Rule
-    {
-        private readonly HashSet<CellState> _requiredInitialStates;
+    {        
+        private readonly List<IRequirement> _requirements;
         private readonly CellState _resultantState;
-        private readonly HashSet<int> _requiredActiveNeighbourCounts;
 
-        public Rule(HashSet<CellState> requiredInitialStates, HashSet<int> requiredActiveNeighbourCounts,
-            CellState resultantState)
+        public Rule(List<IRequirement> requirements, CellState resultantState)
         {
-            _validateRule(requiredInitialStates, requiredActiveNeighbourCounts);
-            
-            _requiredInitialStates = requiredInitialStates;
-            _requiredActiveNeighbourCounts = requiredActiveNeighbourCounts;
+            _requirements = requirements;
             _resultantState = resultantState;
         }
 
-        public CellState GetNextCellState(int activeNeighbourCount, CellState initialState)
+        public CellState GetNextCellState(IReadOnlyList<IReadOnlyList<Cell>> concernedCells)
         {
-            return _meetsRequirements(activeNeighbourCount, initialState) ? _resultantState : initialState;
-        }
-
-        private bool _meetsRequirements(int activeNeighbourCount, CellState initialState)
-        {
-            return _requiredActiveNeighbourCounts.Contains(activeNeighbourCount) && 
-                   _requiredInitialStates.Contains(initialState);
-        }
-
-        private void _validateRule(HashSet<CellState> requiredInitialStates, HashSet<int> requiredActiveNeighbourCounts)
-        {
-            if (requiredInitialStates.Count == 0) throw new RuleInvalidException(requiredInitialStates);
-            
-            if (requiredActiveNeighbourCounts.Any(number => number < 0 || number > 8))
-            {
-                throw new RuleInvalidException(requiredActiveNeighbourCounts);
-            }
+            var initialState = concernedCells[1][1].GetState();
+            return _requirements.All(requirement => requirement.Met(concernedCells)) ? _resultantState : initialState;
         }
     }
 }

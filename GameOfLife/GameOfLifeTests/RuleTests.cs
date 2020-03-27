@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using GameOfLife;
 using GameOfLife.Business;
 using GameOfLife.Business.Exceptions;
 using NUnit.Framework;
@@ -10,27 +12,27 @@ namespace GameOfLifeTests
     {
 
         private Rule _overcrowdingRule;
+        private List<List<Cell>> _grid = new List<List<Cell>>();
         
         [SetUp]
         public void Setup()
         {
-            _overcrowdingRule = new Rule(
-                new HashSet<CellState>{CellState.Alive},
-                new HashSet<int> {4, 5, 6, 7, 8}, CellState.Dead);
-        }
+            var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
+            var moreThanThreeNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{4, 5, 6, 7, 8});
+            var requirements = new List<IRequirement> {cellAliveRequirement, moreThanThreeNeighboursRequirement};
+            
+            _overcrowdingRule = new Rule(requirements, CellState.Dead);
 
-        [Test]
-        public void 
-            It_Should_Throw_A_RuleInvalidException_When_Trying_To_Create_A_Rule_With_An_Empty_RequiredInitialStates()
-        {
-            void CheckFunction()
+            for (var i = 0; i < 3; i++)
             {
-                var invalidRule = new Rule(
-                    new HashSet<CellState>(),
-                    new HashSet<int> {1, 2, 3, 4, 5, 6, 7, 8}, CellState.Dead);
+                _grid.Add(new List<Cell>
+                            {
+                                new Cell(),
+                                new Cell(),
+                                new Cell()
+                            });
             }
             
-            Assert.Throws(typeof(RuleInvalidException), CheckFunction);
         }
 
         [Test]
@@ -39,12 +41,14 @@ namespace GameOfLifeTests
         {
             void CheckFunction()
             {
-                var invalidRule = new Rule(
-                    new HashSet<CellState>{CellState.Alive},
-                    new HashSet<int> {-9}, CellState.Dead);
+                var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
+                var moreThanThreeNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{-9});
+                var requirements = new List<IRequirement> {cellAliveRequirement, moreThanThreeNeighboursRequirement};
+                
+                var invalidRule = new Rule(requirements, CellState.Alive);
             }
             
-            Assert.Throws(typeof(RuleInvalidException), CheckFunction);
+            Assert.Throws(typeof(RequirementInvalidException), CheckFunction);
         }
 
         [Test]
@@ -53,36 +57,65 @@ namespace GameOfLifeTests
         {
             void CheckFunction()
             {
-                var invalidRule = new Rule(
-                    new HashSet<CellState>{CellState.Alive},
-                    new HashSet<int> {9}, CellState.Dead);
+                var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
+                var moreThanThreeNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{9});
+                var requirements = new List<IRequirement> {cellAliveRequirement, moreThanThreeNeighboursRequirement};
+                
+                var invalidRule = new Rule(requirements, CellState.Alive);
             }
             
-            Assert.Throws(typeof(RuleInvalidException), CheckFunction);
+            Assert.Throws(typeof(RequirementInvalidException), CheckFunction);
         }
 
         [Test]
         public void It_Should_Return_Dead_Given_OvercrowdingRule_With_Alive_Overcrowded_Cell()
         {
-            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(7, CellState.Alive));
+            foreach (var cell in _grid.SelectMany(row => row))
+            {
+                cell.Revive();
+            }
+
+
+            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(_grid));
         }
         
         [Test]
         public void It_Should_Return_Dead_Given_OvercrowdingRule_With_Dead_Overcrowded_Cell()
         {
-            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(7, CellState.Dead));
+            foreach (var cell in _grid.SelectMany(row => row))
+            {
+                cell.Revive();
+            }
+            _grid[1][1].Kill();
+            
+            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(_grid));
         }
         
         [Test]
         public void It_Should_Return_Dead_Given_OvercrowdingRule_With_Dead_Undercrowded_Cell()
         {
-            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(2, CellState.Dead));
+            foreach (var cell in _grid.SelectMany(row => row))
+            {
+                cell.Kill();
+            }
+            _grid[0][0].Revive();
+            _grid[0][1].Revive();
+            
+            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(_grid));
         }
         
         [Test]
         public void It_Should_Return_Alive_Given_OvercrowdingRule_With_Alive_Undercrowded_Cell()
         {
-            Assert.AreEqual(CellState.Alive, _overcrowdingRule.GetNextCellState(2, CellState.Alive));
+            foreach (var cell in _grid.SelectMany(row => row))
+            {
+                cell.Kill();
+            }
+            _grid[0][0].Revive();
+            _grid[0][1].Revive();
+            _grid[1][1].Revive();
+            
+            Assert.AreEqual(CellState.Alive, _overcrowdingRule.GetNextCellState(_grid));
         }
     }
 }
