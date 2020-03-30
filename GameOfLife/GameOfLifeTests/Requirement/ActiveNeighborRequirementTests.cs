@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using GameOfLife;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirement;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Requirement
 {
-    public class ActiveNeighborRequirementsTests
+    public class ActiveNeighborRequirementTests
     {
         private ActiveNeighbourRequirement _fourOrMoreActiveNeighbourRequirement;
 

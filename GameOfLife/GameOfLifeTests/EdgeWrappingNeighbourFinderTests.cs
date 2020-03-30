@@ -1,62 +1,81 @@
-// namespace GameOfLifeTests
-// {
-//     public class EdgeWrappingNeighbourFinderTests
-//     {
-//         
-//         [Test]
-//         public void It_Should_Return_Eight_Given_A_Top_Left_Corner_Cell_Surrounded_By_Alive_Cells()
-//         {
-//             foreach (var cell in _grid.SelectMany(row => row))
-//             {
-//                 cell.Revive();
-//             }
-//
-//             var neighbourFinder = new EdgeWrappingNeighbourFinder(_grid);
-//             var activeNeighbourCount = neighbourFinder.GetNeighbors(new CellPosition(0, 0));
-//             
-//             Assert.AreEqual(8, activeNeighbourCount);
-//         }
-//         
-//         [Test]
-//         public void It_Should_Return_Eight_Given_A_Top_Right_Corner_Cell_Surrounded_By_Alive_Cells()
-//         {
-//             foreach (var cell in _grid.SelectMany(row => row))
-//             {
-//                 cell.Revive();
-//             }
-//
-//             var neighbourFinder = new EdgeWrappingNeighbourFinder(_grid);
-//             var activeNeighbourCount = neighbourFinder.GetNeighbors(new CellPosition(0, 2));
-//             
-//             Assert.AreEqual(8, activeNeighbourCount);
-//         }
-//         
-//         [Test]
-//         public void It_Should_Return_Eight_Given_A_Bottom_Left_Corner_Cell_Surrounded_By_Alive_Cells()
-//         {
-//             foreach (var cell in _grid.SelectMany(row => row))
-//             {
-//                 cell.Revive();
-//             }
-//
-//             var neighbourFinder = new EdgeWrappingNeighbourFinder(_grid);
-//             var activeNeighbourCount = neighbourFinder.GetNeighbors(new CellPosition(2, 0));
-//             
-//             Assert.AreEqual(8, activeNeighbourCount);
-//         }
-//         
-//         [Test]
-//         public void It_Should_Return_Eight_Given_A_Bottom_Right_Corner_Cell_Surrounded_By_Alive_Cells()
-//         {
-//             foreach (var cell in _grid.SelectMany(row => row))
-//             {
-//                 cell.Revive();
-//             }
-//
-//             var neighbourFinder = new EdgeWrappingNeighbourFinder(_grid);
-//             var activeNeighbourCount = neighbourFinder.GetNeighbors(new CellPosition(2, 2));
-//             
-//             Assert.AreEqual(8, activeNeighbourCount);
-//         }
-//     }
-// }
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using GameOfLife.Business;
+using GameOfLife.Business.Cell;
+using NUnit.Framework;
+
+namespace GameOfLifeTests
+{
+    public class EdgeWrappingNeighbourFinderTests
+    {
+        private EdgeWrappingNeighbourFinder _edgeWrappingNeighbourFinder;
+        
+        [SetUp]
+        public void Setup()
+        {
+            var aliveCellLeftRow = new List<ReadOnlyCell>
+            {
+                new ReadOnlyCell(CellState.Alive),
+                new ReadOnlyCell(CellState.Dead),
+                new ReadOnlyCell(CellState.Dead)
+            };
+            
+            var allDeadRow = new List<ReadOnlyCell>
+            {
+                new ReadOnlyCell(CellState.Dead),
+                new ReadOnlyCell(CellState.Dead),
+                new ReadOnlyCell(CellState.Dead)
+            };
+            
+            var aliveCenterCellGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
+            {
+                new ReadOnlyCollection<ReadOnlyCell>(aliveCellLeftRow),
+                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow),
+                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow)
+            };
+            
+            var aliveReadOnlyCenterCellGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveCenterCellGrid);
+            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
+        }
+        
+        [Test]
+        public void It_Should_Return_The_Active_Cell_In_The_Middle_Of_The_Neighbours_Grid_Given_The_Top_Left_Cell() {
+            var centerCell = new CellPosition(0, 0);
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
+            
+            Assert.AreEqual(CellState.Alive, neighbours[1][1].GetState());
+        }
+        
+        [Test]
+        public void It_Should_Return_The_Active_Cell_In_The_Middle_Right_Of_The_Neighbours_Grid_Given_The_Top_Right_Cell() {
+            var centerCell = new CellPosition(0, 2);
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
+            
+            Assert.AreEqual(CellState.Alive, neighbours[1][2].GetState());
+        }
+        
+        [Test]
+        public void It_Should_Return_The_Active_Cell_In_The_Bottom_Right_Of_The_Neighbours_Grid_Given_The_Bottom_Right_Cell() {
+            var centerCell = new CellPosition(2, 2);
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
+            
+            Assert.AreEqual(CellState.Alive, neighbours[2][2].GetState());
+        }
+        
+        [Test]
+        public void It_Should_Return_The_Active_Cell_In_The_Bottom_Center_Of_The_Neighbours_Grid_Given_The_Bottom_Left_Cell() {
+            var centerCell = new CellPosition(2, 0);
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
+            
+            Assert.AreEqual(CellState.Alive, neighbours[2][1].GetState());
+        }
+        
+        [Test]
+        public void It_Should_Return_The_Active_Cell_In_The_Top_Right_Of_The_Neighbours_Grid_Given_The_Center_Cell() {
+            var centerCell = new CellPosition(1, 1);
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
+            
+            Assert.AreEqual(CellState.Alive, neighbours[0][0].GetState());
+        }
+    }
+}

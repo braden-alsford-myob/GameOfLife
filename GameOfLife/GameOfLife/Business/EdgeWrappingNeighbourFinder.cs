@@ -8,7 +8,7 @@ namespace GameOfLife.Business
 {
     public class EdgeWrappingNeighbourFinder
     {
-        private readonly IReadOnlyList<IReadOnlyList<ReadOnlyCell>> _grid;
+        private readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> _grid;
         
         private int _aboveRowIndex;
         private int _currentRowIndex;
@@ -17,7 +17,7 @@ namespace GameOfLife.Business
         private int _currentColumnIndex;
         private int _rightColumnIndex;
         
-        public EdgeWrappingNeighbourFinder(IReadOnlyList<IReadOnlyList<ReadOnlyCell>> grid)
+        public EdgeWrappingNeighbourFinder(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> grid)
         {
             _grid = grid;
         }
@@ -28,7 +28,7 @@ namespace GameOfLife.Business
 
             var rows = new List<ReadOnlyCollection<ReadOnlyCell>>
             {
-                new ReadOnlyCollection<ReadOnlyCell>(GetTopRow()),
+                new ReadOnlyCollection<ReadOnlyCell>(GetAboveRow()),
                 new ReadOnlyCollection<ReadOnlyCell>(GetMiddleRow()),
                 new ReadOnlyCollection<ReadOnlyCell>(GetBelowRow())
             };
@@ -48,7 +48,7 @@ namespace GameOfLife.Business
             _rightColumnIndex = _getRightColumnIndex(cellPosition);
         }
         
-        private List<ReadOnlyCell> GetTopRow()
+        private List<ReadOnlyCell> GetAboveRow()
         {
             return new List<ReadOnlyCell>
             {
