@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using GameOfLife.Business.Cell;
 using GameOfLife.Business.Exceptions;
 
 namespace GameOfLife.Business.Requirement
@@ -16,27 +14,39 @@ namespace GameOfLife.Business.Requirement
             _activeNeighbourCounts = activeNeighbourCounts;
         }
 
-        public bool HasMet(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
+        public bool HasMet(ThreeByThreeGrid concernedCells)
         {
-            var neighbouringCells = GetNeighbouringCells(concernedCells);
-            var activeNeighbourCount = CalculateActiveNeighbours(neighbouringCells);
+            var activeNeighbourCount = CalculateActiveNeighbours(concernedCells);
             return _activeNeighbourCounts.Contains(activeNeighbourCount);
         }
-        
-        private static IEnumerable<ICell> GetNeighbouringCells(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
+
+        private static int CalculateActiveNeighbours(ThreeByThreeGrid concernedCells)
         {
-            var neighbouringCells = new List<ICell>();
-            neighbouringCells.AddRange(concernedCells[0]);   // Top Row
-            neighbouringCells.Add(concernedCells[1][0]);     // Middle Left
-            neighbouringCells.Add(concernedCells[1][2]);     // Middle Right
-            neighbouringCells.AddRange(concernedCells[2]);   // Bottom Row
-            
+            var neighbouringCellStates = GetNeighbouringCellStates(concernedCells);
+            return neighbouringCellStates.Count(state => state == CellState.Alive);
+        }
+
+        private static List<CellState> GetNeighbouringCellStates(ThreeByThreeGrid concernedCells)
+        {
+            var neighbouringCells = new List<CellState>();
+
+            for (var rowIndex = 0; rowIndex < 3; rowIndex++)
+            {
+                for (var columnIndex = 0; columnIndex < 3; columnIndex++)
+                {
+                    if (!IsCenterCell(rowIndex, columnIndex))
+                    {
+                        neighbouringCells.Add(concernedCells.GetCellState(rowIndex, columnIndex));
+                    }
+                }
+            }
+
             return neighbouringCells;
         }
 
-        private static int CalculateActiveNeighbours(IEnumerable<ICell> neighbouringCells)
+        private static bool IsCenterCell(int rowIndex, int columnIndex)
         {
-            return neighbouringCells.Count(cell => cell.GetState() == CellState.Alive);
+            return rowIndex == 2 && columnIndex == 2;
         }
 
         private static void ValidateActiveNeighbourCounts(HashSet<int> activeNeighbourCounts)

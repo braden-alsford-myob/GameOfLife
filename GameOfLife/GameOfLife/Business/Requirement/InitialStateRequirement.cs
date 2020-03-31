@@ -13,10 +13,9 @@ namespace GameOfLife.Business.Requirement
             _initialStates = initialStates;
         }
 
-        public bool HasMet(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> concernedCells)
+        public bool HasMet(ThreeByThreeGrid concernedCells)
         {
-            var centerCell = concernedCells[1][1];
-            return _initialStates.Contains(centerCell.GetState());
+            return _initialStates.Contains(concernedCells.GetCellState(1, 1));
         }
     }
 }

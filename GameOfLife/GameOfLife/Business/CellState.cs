@@ -3,6 +3,7 @@ namespace GameOfLife.Business
     public enum CellState
     {
         Alive,
-        Dead
+        Dead,
+        NoChange
     }
 }
