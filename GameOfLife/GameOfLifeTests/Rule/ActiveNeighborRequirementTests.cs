@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
-using GameOfLife.Business.Requirement;
+using GameOfLife.Business.Requirements;
 using GameOfLifeTests.Rule.Helpers;
 using NUnit.Framework;
 

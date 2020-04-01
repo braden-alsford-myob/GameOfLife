@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using GameOfLife.Business.Cell;
 
-namespace GameOfLife.Business.Requirement
+namespace GameOfLife.Business.Requirements
 {
     public class InitialStateRequirement : IRequirement
     {

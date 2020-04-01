@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.Requirement
+namespace GameOfLife.Business.Requirements
 {
     public interface IRequirement
     {

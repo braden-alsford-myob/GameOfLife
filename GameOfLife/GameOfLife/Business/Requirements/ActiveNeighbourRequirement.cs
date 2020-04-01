@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameOfLife.Business.Exceptions;
 
-namespace GameOfLife.Business.Requirement
+namespace GameOfLife.Business.Requirements
 {
     public class ActiveNeighbourRequirement : IRequirement
     {

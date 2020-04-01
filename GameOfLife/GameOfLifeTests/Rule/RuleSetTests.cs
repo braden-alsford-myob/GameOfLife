@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Requirement;
+using GameOfLife.Business.Requirements;
 using GameOfLifeTests.Rule.Helpers;
 using NUnit.Framework;
 

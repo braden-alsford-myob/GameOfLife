@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Requirement;
+using GameOfLife.Business.Requirements;
 
 namespace GameOfLifeTests.Rule.Helpers
 {
