@@ -21,7 +21,7 @@ namespace GameOfLifeTests.Rule.Helpers
             new ReadOnlyCell(CellState.Alive)
         };
         
-        public static ThreeByThreeGrid GetAllDeadGrid()
+        public static ReadOnlyGrid GetAllDeadGrid()
         {
             var allDeadGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
             {
@@ -32,10 +32,10 @@ namespace GameOfLifeTests.Rule.Helpers
             
             var allDeadReadOnlyGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(allDeadGrid);
             
-            return new ThreeByThreeGrid(allDeadReadOnlyGrid);
+            return new ReadOnlyGrid(allDeadReadOnlyGrid);
         }
 
-        public static ThreeByThreeGrid GetAllAliveGrid()
+        public static ReadOnlyGrid GetAllAliveGrid()
         {
             var allActiveRows = new List<ReadOnlyCollection<ReadOnlyCell>>
             {
@@ -46,10 +46,10 @@ namespace GameOfLifeTests.Rule.Helpers
             
             var allAliveReadOnlyGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(allActiveRows);
             
-            return new ThreeByThreeGrid(allAliveReadOnlyGrid);
+            return new ReadOnlyGrid(allAliveReadOnlyGrid);
         }
 
-        public static ThreeByThreeGrid GetOnlyAliveCenterGrid()
+        public static ReadOnlyGrid GetOnlyAliveCenterGrid()
         {
             var aliveCenterRow = new List<ReadOnlyCell>
             {
@@ -67,10 +67,10 @@ namespace GameOfLifeTests.Rule.Helpers
             
             var aliveCenterReadOnlyGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(allActiveRows);
             
-            return new ThreeByThreeGrid(aliveCenterReadOnlyGrid);
+            return new ReadOnlyGrid(aliveCenterReadOnlyGrid);
         }
 
-        public static ThreeByThreeGrid GetOnlyDeadCenterGrid()
+        public static ReadOnlyGrid GetOnlyDeadCenterGrid()
         {
             var deadCenterRow = new List<ReadOnlyCell>
             {
@@ -88,10 +88,10 @@ namespace GameOfLifeTests.Rule.Helpers
             
             var deadCenterReadOnlyGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(deadCenterGrid);
             
-            return new ThreeByThreeGrid(deadCenterReadOnlyGrid);
+            return new ReadOnlyGrid(deadCenterReadOnlyGrid);
         }
 
-        public static ThreeByThreeGrid GetAliveCenterWithFourAliveNeighboursGrid()
+        public static ReadOnlyGrid GetAliveCenterWithFourAliveNeighboursGrid()
         {
             var onlyLeftDeadRow = new List<ReadOnlyCell>
             {
@@ -110,7 +110,21 @@ namespace GameOfLifeTests.Rule.Helpers
             var aliveCenterWithFourAliveNeighboursReadOnlyGrid = 
                 new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveCenterWithFourAliveNeighbours);
             
-            return new ThreeByThreeGrid(aliveCenterWithFourAliveNeighboursReadOnlyGrid);
+            return new ReadOnlyGrid(aliveCenterWithFourAliveNeighboursReadOnlyGrid);
+        }
+
+        public static ReadOnlyGrid GetTwoRowAllAliveGrid()
+        {
+            var twoRowAllAliveGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
+            {
+                new ReadOnlyCollection<ReadOnlyCell>(AllAliveRow),
+                new ReadOnlyCollection<ReadOnlyCell>(AllAliveRow),
+            };
+            
+            var twoRowAllAliveReadOnlyGrid = 
+                new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(twoRowAllAliveGrid);
+            
+            return new ReadOnlyGrid(twoRowAllAliveReadOnlyGrid);
         }
     }
 }

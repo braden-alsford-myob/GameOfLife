@@ -11,7 +11,7 @@ namespace GameOfLife.Business
             _rules = rules;
         }
 
-        public CellState GetNextCellState(ThreeByThreeGrid neighbours)
+        public CellState GetNextCellState(ReadOnlyGrid neighbours)
         {
             var finalCellState = CellState.NoChange;
 

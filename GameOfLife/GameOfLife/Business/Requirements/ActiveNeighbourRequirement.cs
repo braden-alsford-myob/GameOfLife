@@ -14,19 +14,19 @@ namespace GameOfLife.Business.Requirements
             _activeNeighbourCounts = activeNeighbourCounts;
         }
 
-        public bool HasMet(ThreeByThreeGrid concernedCells)
+        public bool HasMet(ReadOnlyGrid concernedCells)
         {
             var activeNeighbourCount = CalculateActiveNeighbours(concernedCells);
             return _activeNeighbourCounts.Contains(activeNeighbourCount);
         }
 
-        private static int CalculateActiveNeighbours(ThreeByThreeGrid concernedCells)
+        private static int CalculateActiveNeighbours(ReadOnlyGrid concernedCells)
         {
             var neighbouringCellStates = GetNeighbouringCellStates(concernedCells);
             return neighbouringCellStates.Count(state => state == CellState.Alive);
         }
 
-        private static List<CellState> GetNeighbouringCellStates(ThreeByThreeGrid concernedCells)
+        private static List<CellState> GetNeighbouringCellStates(ReadOnlyGrid concernedCells)
         {
             var neighbouringCells = new List<CellState>();
 
