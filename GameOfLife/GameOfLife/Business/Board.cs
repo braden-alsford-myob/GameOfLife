@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace GameOfLife.Business
 {
     public class Board
     {
         private RuleSet _ruleset;
-        private List<List<Cell.Cell>> _grid;
+        private readonly List<List<Cell.Cell>> _grid;
 
         public Board(RuleSet ruleset, List<List<Cell.Cell>> grid)
         {
@@ -22,7 +21,7 @@ namespace GameOfLife.Business
 
         public ReadOnlyGrid GetGrid()
         {
-            throw new NotImplementedException();
+            return new ReadOnlyGrid(_grid);
         }
     }
 }

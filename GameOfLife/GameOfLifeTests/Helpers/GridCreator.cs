@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 
-namespace GameOfLifeTests.Rule.Helpers
+namespace GameOfLifeTests.Helpers
 {
-    public static class GridCreatorHelper
+    public static class GridCreator
     {
         private static readonly List<ReadOnlyCell> AllDeadRow = new List<ReadOnlyCell>
         {

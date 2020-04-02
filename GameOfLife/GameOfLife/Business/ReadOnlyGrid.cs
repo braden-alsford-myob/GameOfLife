@@ -14,6 +14,11 @@ namespace GameOfLife.Business
             Grid = grid;
         }
 
+        public ReadOnlyGrid(List<List<Cell.Cell>> grid)
+        {
+            Grid = CreateReadOnlyGrid(grid);
+        }
+
         public CellState GetCellState(int row, int column)
         {
             return Grid[row][column].GetState();
@@ -21,14 +26,20 @@ namespace GameOfLife.Business
 
         public bool Equals(ReadOnlyGrid otherGrid)
         {
+            return SameSize(Grid, otherGrid.Grid) && SameStates(Grid, otherGrid.Grid);
+        }
 
-            if (!SameSize(Grid, otherGrid.Grid)) return false;
-            for (var i = 0; i < Grid.Count; i++)
+        private static ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> CreateReadOnlyGrid(List<List<Cell.Cell>> grid)
+        {
+            var readOnlyRows = new List<ReadOnlyCollection<ReadOnlyCell>>();
+            
+            foreach (var row in grid)
             {
-                if (!SameRowStates(Grid[i], otherGrid.Grid[i])) return false;
+                var readOnlyRow = row.Select(cell => new ReadOnlyCell(cell.GetState())).ToList();
+                readOnlyRows.Add( new ReadOnlyCollection<ReadOnlyCell>(readOnlyRow));
             }
-
-            return true;
+            
+            return new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(readOnlyRows);
         }
 
         private static bool SameSize(IReadOnlyList<ReadOnlyCollection<ReadOnlyCell>> thisGrid, 
@@ -38,6 +49,17 @@ namespace GameOfLife.Business
             for (var i = 0; i < thisGrid.Count; i++)
             {
                 if (thisGrid[i].Count != otherGrid[i].Count) return false;
+            }
+
+            return true;
+        }
+
+        private static bool SameStates(IReadOnlyList<ReadOnlyCollection<ReadOnlyCell>> thisGrid, 
+            IReadOnlyList<ReadOnlyCollection<ReadOnlyCell>> otherGrid)
+        {
+            for (var i = 0; i < thisGrid.Count; i++)
+            {
+                if (!SameRowStates(thisGrid[i], otherGrid[i])) return false;
             }
 
             return true;

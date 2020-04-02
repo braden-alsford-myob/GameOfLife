@@ -15,7 +15,7 @@ namespace GameOfLife.Business
         {
             var finalCellState = CellState.NoChange;
 
-            for (var i = _rules.Count; i > 0; i--)
+            for (var i = _rules.Count; i > 0; i--) // Reverse through to apply highest priority last.
             {
                 var nextState = _rules[i].GetNextCellState(neighbours);
                 if (nextState != CellState.NoChange) finalCellState = nextState;

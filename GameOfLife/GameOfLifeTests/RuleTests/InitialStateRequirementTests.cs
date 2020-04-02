@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using GameOfLife.Business;
-using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
-using GameOfLifeTests.Rule.Helpers;
+using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.Rule
+namespace GameOfLifeTests.RuleTests
 {
     public class InitialStateRequirementTests
     {
@@ -22,14 +19,14 @@ namespace GameOfLifeTests.Rule
         [Test]
         public void It_Should_Return_True_Given_An_Active_Center_Cell()
         {
-            var aliveCenterGrid = GridCreatorHelper.GetOnlyAliveCenterGrid();
+            var aliveCenterGrid = GridCreator.GetOnlyAliveCenterGrid();
             Assert.True(_aliveCenterCellRequirement.HasMet(aliveCenterGrid));
         }
 
         [Test]
         public void It_Should_Return_False_Given_An_Active_Center_Cell()
         {
-            var allDeadGrid = GridCreatorHelper.GetAllDeadGrid();
+            var allDeadGrid = GridCreator.GetAllDeadGrid();
             Assert.False(_aliveCenterCellRequirement.HasMet(allDeadGrid));
         }
     }

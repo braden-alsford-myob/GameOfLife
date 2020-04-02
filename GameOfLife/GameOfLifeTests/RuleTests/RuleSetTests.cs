@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
 using GameOfLife.Business.Requirements;
-using GameOfLifeTests.Rule.Helpers;
+using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.Rule
+namespace GameOfLifeTests.RuleTests
 {
     public class RuleSetTests
     {
@@ -13,7 +13,7 @@ namespace GameOfLifeTests.Rule
         [SetUp]
         public void Setup()
         {
-            var overcrowdingRule = RuleCreatorHelper.GetOvercrowdingRule();
+            var overcrowdingRule = RuleCreator.GetOvercrowdingRule();
 
             var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
             var eightNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{8});
@@ -32,7 +32,7 @@ namespace GameOfLifeTests.Rule
         [Test]
         public void It_Should_Return_Dead_Given_A_Dead_Cell_Not_Meeting_Any_SubRules()
         {
-            var allDeadGrid = GridCreatorHelper.GetAllDeadGrid();
+            var allDeadGrid = GridCreator.GetAllDeadGrid();
             var nextState = _ruleSet.GetNextCellState(allDeadGrid);
             Assert.AreEqual(CellState.Dead, nextState);
         }
@@ -40,7 +40,7 @@ namespace GameOfLifeTests.Rule
         [Test]
         public void It_Should_Return_Dead_Given_A_Cell_Meeting_Overcrowding_Rule_Only()
         {
-            var aliveCenterWithFourAliveNeighboursGrid = GridCreatorHelper.GetAliveCenterWithFourAliveNeighboursGrid();
+            var aliveCenterWithFourAliveNeighboursGrid = GridCreator.GetAliveCenterWithFourAliveNeighboursGrid();
             var nextState = _ruleSet.GetNextCellState(aliveCenterWithFourAliveNeighboursGrid);
             Assert.AreEqual(CellState.Dead, nextState);
         }
@@ -48,7 +48,7 @@ namespace GameOfLifeTests.Rule
         [Test]
         public void It_Should_Return_Alive_Given_A_Cell_Meeting_Both_Rules_And_SuperOvercrowding_Is_Prioritized()
         {
-            var allAliveGrid = GridCreatorHelper.GetAllAliveGrid();
+            var allAliveGrid = GridCreator.GetAllAliveGrid();
             var nextState = _ruleSet.GetNextCellState(allAliveGrid);
             Assert.AreEqual(CellState.Alive, nextState);
         }

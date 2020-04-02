@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using GameOfLife.Business;
-using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
-using GameOfLifeTests.Rule.Helpers;
+using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.Rule
+namespace GameOfLifeTests.RuleTests
 {
     public class ActiveNeighborRequirementTests
     {
@@ -21,14 +18,14 @@ namespace GameOfLifeTests.Rule
         [Test]
         public void It_Should_Return_True_Given_A_Grid_Of_Active_Cells()
         {
-            var allAliveGrid = GridCreatorHelper.GetAllAliveGrid();
+            var allAliveGrid = GridCreator.GetAllAliveGrid();
             Assert.True(_fourOrMoreActiveNeighbourRequirement.HasMet(allAliveGrid));
         }
         
         [Test]
         public void It_Should_Return_Zero_Given_A_Grid_Of_Dead_Cells()
         {
-            var allDeadGrid = GridCreatorHelper.GetAllDeadGrid();
+            var allDeadGrid = GridCreator.GetAllDeadGrid();
             Assert.False(_fourOrMoreActiveNeighbourRequirement.HasMet(allDeadGrid));
         }
     }
