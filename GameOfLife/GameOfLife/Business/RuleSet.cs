@@ -14,19 +14,15 @@ namespace GameOfLife.Business
 
         public CellState GetNextCellState(ReadOnlyGrid neighbours)
         {
-            var finalCellState = CellState.NoChange;
-            
             var prioritisedRuleKeys = GetRuleKeysOrderedInReversePriority();
-            
-            //TODO change to have the output of one rule the input to the next (chaining)
+
+            var currentState = neighbours.GetCellState(new CellPosition(1, 1));
             foreach(var ruleKey in prioritisedRuleKeys)
             {
-                var nextState = _rules[ruleKey].GetNextCellState(neighbours);
-                if (nextState != CellState.NoChange) finalCellState = nextState;
+                currentState = _rules[ruleKey].GetNextCellState(neighbours, currentState);
             }
 
-            return finalCellState == 
-                   CellState.NoChange ? neighbours.GetCellState(new CellPosition(1, 1)) : finalCellState;
+            return currentState;
         }
 
         private List<int> GetRuleKeysOrderedInReversePriority()

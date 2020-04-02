@@ -15,9 +15,9 @@ namespace GameOfLife.Business
             _resultantState = resultantState;
         }
 
-        public CellState GetNextCellState(ReadOnlyGrid concernedCells)
+        public CellState GetNextCellState(ReadOnlyGrid concernedCells, CellState initialState)
         {
-            return _requirements.All(requirement => requirement.HasMet(concernedCells)) ? _resultantState : CellState.NoChange;
+            return _requirements.All(requirement => requirement.HasMet(concernedCells)) ? _resultantState : initialState;
         }
     }
 }

@@ -19,28 +19,32 @@ namespace GameOfLifeTests.RuleTests
         public void It_Should_Return_Dead_Given_An_Alive_Cell_With_Eight_Alive_Neighbours()
         {
             var allAliveGrid = GridCreator.GetAllAliveGrid();
-            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(allAliveGrid));
+            var initialState = allAliveGrid.GetCellState(new CellPosition(1, 1));
+            Assert.AreEqual(CellState.Dead, _overcrowdingRule.GetNextCellState(allAliveGrid, initialState));
         }
 
         [Test]
         public void It_Should_Return_NoChange_Given_An_Dead_Cell_With_Eight_Alive_Neighbours()
         {
             var deadCenterOnlyGrid = GridCreator.GetOnlyDeadCenterGrid();
-            Assert.AreEqual(CellState.NoChange, _overcrowdingRule.GetNextCellState(deadCenterOnlyGrid));
+            var initialState = deadCenterOnlyGrid.GetCellState(new CellPosition(1, 1));
+            Assert.AreEqual(initialState, _overcrowdingRule.GetNextCellState(deadCenterOnlyGrid, initialState));
         }
 
         [Test]
         public void It_Should_Return_NoChange_Given_An_Alive_Cell_With_No_Alive_Neighbours()
         {
             var onlyAliveCenterGrid = GridCreator.GetOnlyAliveCenterGrid();
-            Assert.AreEqual(CellState.NoChange, _overcrowdingRule.GetNextCellState(onlyAliveCenterGrid));
+            var initialState = onlyAliveCenterGrid.GetCellState(new CellPosition(1, 1));
+            Assert.AreEqual(initialState, _overcrowdingRule.GetNextCellState(onlyAliveCenterGrid, initialState));
         }
         
         [Test]
         public void It_Should_Return_NoChange_Given_A_Dead_Cell_With_No_Alive_Neighbours()
         {
             var allDeadGrid = GridCreator.GetAllDeadGrid();
-            Assert.AreEqual(CellState.NoChange, _overcrowdingRule.GetNextCellState(allDeadGrid));
+            var initialState = allDeadGrid.GetCellState(new CellPosition(1, 1));
+            Assert.AreEqual(initialState, _overcrowdingRule.GetNextCellState(allDeadGrid, initialState));
         }
         
     }
