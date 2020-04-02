@@ -7,6 +7,7 @@ namespace GameOfLife.Business.Requirements
     public class ActiveNeighbourRequirement : IRequirement
     {
         private readonly HashSet<int> _activeNeighbourCounts;
+        private const int CenterOfGrid = 1;
 
         public ActiveNeighbourRequirement(HashSet<int> activeNeighbourCounts)
         {
@@ -46,7 +47,7 @@ namespace GameOfLife.Business.Requirements
 
         private static bool IsCenterCell(int rowIndex, int columnIndex)
         {
-            return rowIndex == 1 && columnIndex == 1;
+            return rowIndex == CenterOfGrid && columnIndex == CenterOfGrid;
         }
 
         private static void ValidateActiveNeighbourCounts(HashSet<int> activeNeighbourCounts)
