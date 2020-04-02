@@ -46,7 +46,7 @@ namespace GameOfLife.Business.Requirements
 
         private static bool IsCenterCell(int rowIndex, int columnIndex)
         {
-            return rowIndex == 2 && columnIndex == 2;
+            return rowIndex == 1 && columnIndex == 1;
         }
 
         private static void ValidateActiveNeighbourCounts(HashSet<int> activeNeighbourCounts)

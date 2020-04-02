@@ -11,7 +11,8 @@ namespace GameOfLifeTests.Helpers
             var rowOne = new List<Cell>
             {
                 new Cell(CellState.Dead),
-                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
@@ -21,19 +22,31 @@ namespace GameOfLifeTests.Helpers
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
             
             var rowThree = new List<Cell>
             {
                 new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
-                new Cell(CellState.Alive),
-                new Cell(CellState.Alive)
+                new Cell(CellState.Dead)
             };
 
             var rowFour = new List<Cell>
             {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead)
+            };
+
+            var rowFive = new List<Cell>
+            {
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
@@ -45,7 +58,8 @@ namespace GameOfLifeTests.Helpers
                 rowOne,
                 rowTwo,
                 rowThree,
-                rowFour
+                rowFour,
+                rowFive
             };
         }
 
@@ -56,14 +70,16 @@ namespace GameOfLifeTests.Helpers
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
 
             var rowTwo = new List<Cell>
             {
-                new Cell(CellState.Alive),
                 new Cell(CellState.Dead),
-                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
 
@@ -71,12 +87,23 @@ namespace GameOfLifeTests.Helpers
             {
                 new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
                 new Cell(CellState.Dead)
             };
 
             var rowFour = new List<Cell>
             {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead)
+            };
+
+            var rowFive = new List<Cell>
+            {
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
                 new Cell(CellState.Dead),
@@ -88,7 +115,8 @@ namespace GameOfLifeTests.Helpers
                 rowOne,
                 rowTwo,
                 rowThree,
-                rowFour
+                rowFour,
+                rowFive
             };
         }
 
@@ -99,20 +127,23 @@ namespace GameOfLifeTests.Helpers
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowTwo = new List<Cell>
             {
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
-                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowThree = new List<Cell>
             {
-                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
                 new Cell(CellState.Dead)
@@ -120,6 +151,16 @@ namespace GameOfLifeTests.Helpers
 
             var rowFour = new List<Cell>
             {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead)
+            };
+
+            var rowFive = new List<Cell>
+            {
+                new Cell(CellState.Dead),
                 new Cell(CellState.Dead),
                 new Cell(CellState.Alive),
                 new Cell(CellState.Alive),
@@ -131,7 +172,122 @@ namespace GameOfLifeTests.Helpers
                 rowOne,
                 rowTwo,
                 rowThree,
-                rowFour
+                rowFour,
+                rowFive
+            };
+        }
+
+        public static List<List<Cell>> GetFrameFour()
+        {
+            var rowOne = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead)
+            };
+
+            var rowTwo = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead)
+            };
+
+            var rowThree = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead)
+            };
+
+            var rowFour = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive)
+            };
+
+            var rowFive = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead)
+            };
+            
+            return new List<List<Cell>>
+            {
+                rowOne,
+                rowTwo,
+                rowThree,
+                rowFour,
+                rowFive
+            };
+        }
+
+        public static List<List<Cell>> GetFrameFive()
+        {
+            var rowOne = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead)
+            };
+
+            var rowTwo = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead)
+            };
+
+            var rowThree = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Dead)
+            };
+
+            var rowFour = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive)
+            };
+
+            var rowFive = new List<Cell>
+            {
+                new Cell(CellState.Dead),
+                new Cell(CellState.Dead),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive),
+                new Cell(CellState.Alive)
+            };
+            
+            return new List<List<Cell>>
+            {
+                rowOne,
+                rowTwo,
+                rowThree,
+                rowFour,
+                rowFive
             };
         }
     }
