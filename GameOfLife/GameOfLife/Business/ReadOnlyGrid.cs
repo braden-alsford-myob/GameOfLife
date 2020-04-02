@@ -19,9 +19,9 @@ namespace GameOfLife.Business
             Grid = CreateReadOnlyGrid(grid);
         }
 
-        public CellState GetCellState(int row, int column)
+        public CellState GetCellState(CellPosition position)
         {
-            return Grid[row][column].GetState();
+            return Grid[position.Row][position.Column].GetState();
         }
 
         public bool Equals(ReadOnlyGrid otherGrid)

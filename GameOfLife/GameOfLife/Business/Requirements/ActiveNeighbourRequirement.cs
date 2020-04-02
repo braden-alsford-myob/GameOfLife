@@ -37,7 +37,8 @@ namespace GameOfLife.Business.Requirements
                 {
                     if (!IsCenterCell(rowIndex, columnIndex))
                     {
-                        neighbouringCells.Add(concernedCells.GetCellState(rowIndex, columnIndex));
+                        var cellPosition = new CellPosition(rowIndex, columnIndex);
+                        neighbouringCells.Add(concernedCells.GetCellState(cellPosition));
                     }
                 }
             }

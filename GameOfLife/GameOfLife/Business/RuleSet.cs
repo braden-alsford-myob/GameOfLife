@@ -22,7 +22,8 @@ namespace GameOfLife.Business
                 if (nextState != CellState.NoChange) finalCellState = nextState;
             }
 
-            return finalCellState == CellState.NoChange ? neighbours.GetCellState(1, 1) : finalCellState;
+            return finalCellState == 
+                   CellState.NoChange ? neighbours.GetCellState(new CellPosition(1, 1)) : finalCellState;
         }
 
         private IEnumerable<Rule> GetRulesOrderedInReversePriority()

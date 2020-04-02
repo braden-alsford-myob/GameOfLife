@@ -13,7 +13,8 @@ namespace GameOfLife.Business.Requirements
 
         public bool HasMet(ReadOnlyGrid concernedCells)
         {
-            return _initialStates.Contains(concernedCells.GetCellState(1, 1));
+            var centerCellPosition = new CellPosition(1, 1);
+            return _initialStates.Contains(concernedCells.GetCellState(centerCellPosition));
         }
     }
 }
