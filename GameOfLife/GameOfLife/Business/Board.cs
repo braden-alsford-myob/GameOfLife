@@ -16,7 +16,13 @@ namespace GameOfLife.Business
 
         public void UpdateToNextGeneration()
         {
-            throw new NotImplementedException();
+            foreach (var row in _grid)
+            {
+                foreach (var cell in row)
+                {
+                    
+                }
+            }
         }
 
         public ReadOnlyGrid GetGrid()

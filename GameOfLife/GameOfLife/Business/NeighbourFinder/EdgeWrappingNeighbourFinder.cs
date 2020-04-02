@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Linq;
 using GameOfLife.Business.Cell;
 
-namespace GameOfLife.Business
+namespace GameOfLife.Business.NeighbourFinder
 {
-    public class EdgeWrappingNeighbourFinder
+    public class EdgeWrappingNeighbourFinder : INeighbourFinder
     {
         private readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> _grid;
         
@@ -17,12 +15,12 @@ namespace GameOfLife.Business
         private int _currentColumnIndex;
         private int _rightColumnIndex;
         
-        public EdgeWrappingNeighbourFinder(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> grid)
+        public EdgeWrappingNeighbourFinder(ReadOnlyGrid readOnlyGrid)
         {
-            _grid = grid;
+            _grid = readOnlyGrid.Grid;
         }
 
-        public ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> GetThreeByThreeGridAroundCell(CellPosition cellPosition)
+        public ReadOnlyGrid GetThreeByThreeGridAroundCell(CellPosition cellPosition)
         {
             SetIndexValues(cellPosition);
 
@@ -33,7 +31,7 @@ namespace GameOfLife.Business
                 new ReadOnlyCollection<ReadOnlyCell>(GetBelowRow())
             };
 
-            return new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(rows);
+            return new ReadOnlyGrid(new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(rows));
             
         }
 

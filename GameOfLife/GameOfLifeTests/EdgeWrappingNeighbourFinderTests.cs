@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.NeighbourFinder;
 using NUnit.Framework;
 
 namespace GameOfLifeTests
@@ -35,7 +36,7 @@ namespace GameOfLifeTests
             };
             
             var aliveReadOnlyCenterCellGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveCenterCellGrid);
-            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
+            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(new ReadOnlyGrid(aliveReadOnlyCenterCellGrid));
         }
         
         [Test]
@@ -43,7 +44,7 @@ namespace GameOfLifeTests
             var centerCell = new CellPosition(0, 0);
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
             
-            Assert.AreEqual(CellState.Alive, neighbours[1][1].GetState());
+            Assert.AreEqual(CellState.Alive, neighbours.Grid[1][1].GetState());
         }
         
         [Test]
@@ -51,7 +52,7 @@ namespace GameOfLifeTests
             var centerCell = new CellPosition(0, 2);
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
             
-            Assert.AreEqual(CellState.Alive, neighbours[1][2].GetState());
+            Assert.AreEqual(CellState.Alive, neighbours.Grid[1][2].GetState());
         }
         
         [Test]
@@ -59,7 +60,7 @@ namespace GameOfLifeTests
             var centerCell = new CellPosition(2, 2);
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
             
-            Assert.AreEqual(CellState.Alive, neighbours[2][2].GetState());
+            Assert.AreEqual(CellState.Alive, neighbours.Grid[2][2].GetState());
         }
         
         [Test]
@@ -67,7 +68,7 @@ namespace GameOfLifeTests
             var centerCell = new CellPosition(2, 0);
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
             
-            Assert.AreEqual(CellState.Alive, neighbours[2][1].GetState());
+            Assert.AreEqual(CellState.Alive, neighbours.Grid[2][1].GetState());
         }
         
         [Test]
@@ -75,7 +76,7 @@ namespace GameOfLifeTests
             var centerCell = new CellPosition(1, 1);
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
             
-            Assert.AreEqual(CellState.Alive, neighbours[0][0].GetState());
+            Assert.AreEqual(CellState.Alive, neighbours.Grid[0][0].GetState());
         }
     }
 }

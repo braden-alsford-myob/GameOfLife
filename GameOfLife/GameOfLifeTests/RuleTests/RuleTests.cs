@@ -7,7 +7,7 @@ namespace GameOfLifeTests.RuleTests
     public class RuleTests
     {
 
-        private GameOfLife.Business.Rule _overcrowdingRule;
+        private Rule _overcrowdingRule;
 
         [SetUp]
         public void Setup()
