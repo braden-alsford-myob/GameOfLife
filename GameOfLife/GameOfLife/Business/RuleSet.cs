@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameOfLife.Business
 {
@@ -14,11 +15,13 @@ namespace GameOfLife.Business
         public CellState GetNextCellState(ReadOnlyGrid neighbours)
         {
             var finalCellState = CellState.NoChange;
-            var prioritisedRules = GetRulesOrderedInReversePriority();
             
-            foreach(var rule in prioritisedRules)
+            var prioritisedRuleKeys = GetRuleKeysOrderedInReversePriority();
+            
+            //TODO change to have the output of one rule the input to the next (chaining)
+            foreach(var ruleKey in prioritisedRuleKeys)
             {
-                var nextState = rule.GetNextCellState(neighbours);
+                var nextState = _rules[ruleKey].GetNextCellState(neighbours);
                 if (nextState != CellState.NoChange) finalCellState = nextState;
             }
 
@@ -26,16 +29,13 @@ namespace GameOfLife.Business
                    CellState.NoChange ? neighbours.GetCellState(new CellPosition(1, 1)) : finalCellState;
         }
 
-        private IEnumerable<Rule> GetRulesOrderedInReversePriority()
+        private List<int> GetRuleKeysOrderedInReversePriority()
         {
-            var rules = new List<Rule>();
-            
-            for (var i = _rules.Count; i > 0; i--)
-            {
-                rules.Add(_rules[i]);
-            }
-            
-            return rules;
+            var prioritizedRules = _rules.Keys.ToList();
+            prioritizedRules.Sort();
+            prioritizedRules.Reverse();
+
+            return prioritizedRules;
         }
         
     }

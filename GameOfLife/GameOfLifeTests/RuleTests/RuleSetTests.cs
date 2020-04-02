@@ -19,11 +19,12 @@ namespace GameOfLifeTests.RuleTests
             var eightNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{8});
             
             var superOvercrowdingRequirements = new List<IRequirement> {cellAliveRequirement, eightNeighboursRequirement};
-            var superOvercrowdingRule = new GameOfLife.Business.Rule(superOvercrowdingRequirements, CellState.Alive);
+            var superOvercrowdingRule = new Rule(superOvercrowdingRequirements, CellState.Alive);
 
-            var rules = new Dictionary<int, GameOfLife.Business.Rule>
+            var rules = new Dictionary<int, Rule>
             {
-                {1, superOvercrowdingRule}, {2, overcrowdingRule}
+                {1, superOvercrowdingRule}, 
+                {2, overcrowdingRule}
             };
 
             _ruleSet = new RuleSet(rules);
