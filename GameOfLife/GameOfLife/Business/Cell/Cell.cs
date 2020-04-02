@@ -4,12 +4,6 @@ namespace GameOfLife.Business.Cell
     {
         private CellState _state;
 
-        //Obsolete i think... TODO
-        public Cell()
-        {
-            _state = CellState.Dead;
-        }        
-        
         public Cell(CellState state)
         {
             _state = state;
