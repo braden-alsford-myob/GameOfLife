@@ -7,8 +7,8 @@ namespace GameOfLife.Presentation
 {
     public class CommandLinePresenter : IPresenter
     {
-        private const string AliveRepresentation = "X";
-        private const string DeadRepresentation = "  ";
+        private const string AliveRepresentation = "🧻 ";
+        private const string DeadRepresentation = "   ";
 
         public void Display(ReadOnlyGrid grid)
         {
@@ -22,12 +22,13 @@ namespace GameOfLife.Presentation
 
         private static void PrintRow(ReadOnlyCollection<ReadOnlyCell> row)
         {
+            Write("|");
             foreach (var cell in row)
             {
                 PrintCell(cell);
             }
             
-            Write("\n");
+            Write("|\n");
         }
 
         private static void PrintCell(ICell cell)

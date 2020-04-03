@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameOfLife.Business.Cell;
 using GameOfLife.Business.NeighbourFinder;
 
 namespace GameOfLife.Business

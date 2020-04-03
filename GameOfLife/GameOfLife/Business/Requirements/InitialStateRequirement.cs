@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameOfLife.Business.Cell;
 
 namespace GameOfLife.Business.Requirements
 {

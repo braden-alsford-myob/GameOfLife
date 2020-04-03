@@ -1,5 +1,6 @@
-﻿using System;
+﻿using GameOfLife.Business;
 using GameOfLife.DataAccess;
+using GameOfLife.Presentation;
 
 namespace GameOfLife
 {
@@ -7,7 +8,9 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var simulationConfig = ConfigurationLoader.LoadSimulationConfiguration("appsettings.json");
+            var simulation = new Simulation(simulationConfig, new CommandLinePresenter());
+            simulation.Excecute();
         }
     }
 }

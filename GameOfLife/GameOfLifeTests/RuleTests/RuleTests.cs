@@ -1,4 +1,5 @@
 using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
