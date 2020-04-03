@@ -16,4 +16,17 @@
       <ProjectReference Include="..\GameOfLife\GameOfLife.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="validappsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="invalidTypeAppsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="invalidFormatAppsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    
+
 </Project>

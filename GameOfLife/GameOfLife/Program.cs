@@ -1,4 +1,5 @@
 ﻿using System;
+using GameOfLife.DataAccess;
 
 namespace GameOfLife
 {
