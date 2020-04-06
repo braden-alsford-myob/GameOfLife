@@ -20,11 +20,17 @@
     <ItemGroup>
         <None Update="validappsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="invalidTypeAppsettings.json">
+        </None>        
+        <None Update="invalidGridType.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>        
-        <None Update="invalidFormatAppsettings.json">
+        <None Update="invalidMaxGenerationsType.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="missingConfigurationElement.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="negativeMaxGenerations.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>

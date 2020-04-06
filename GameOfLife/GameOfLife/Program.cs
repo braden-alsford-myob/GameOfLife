@@ -6,7 +6,7 @@ namespace GameOfLife
 {
     class Program
     {
-        private const string ConfigFileName = "appsettings.json";
+        private const string ConfigFileName = "simulationConfig.json";
         
         static void Main(string[] args)
         {
