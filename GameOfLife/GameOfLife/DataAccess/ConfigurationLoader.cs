@@ -1,13 +1,15 @@
-using System.IO;
+using System;
 using GameOfLife.Business;
 using Microsoft.Extensions.Configuration;
 
 namespace GameOfLife.DataAccess
 {
-    public class ConfigurationLoader
+    public static class ConfigurationLoader
     {
-        private const string MaxGenerations = "Maximum Generations";
-        private const string AnimationDelay = "Animation Delay";
+        private const string MaxGenerationsKey = "Maximum Generations";
+        private const string AnimationDelayKey = "Animation Delay";
+        private const string GridTypeKey = "Grid Type";
+        private const string RuleSetTypeKey = "Rule Set Type";
         
         public static SimulationConfiguration LoadSimulationConfiguration(string path)
         {
@@ -15,10 +17,12 @@ namespace GameOfLife.DataAccess
                 .AddJsonFile(path)
                 .Build();
 
-            var maxGenerations = int.Parse(config[MaxGenerations]);
-            var animationDelay = int.Parse(config[AnimationDelay]);
+            var maxGenerations = int.Parse(config[MaxGenerationsKey]);
+            var animationDelay = int.Parse(config[AnimationDelayKey]);
+            var gridType = (GridType) Enum.Parse(typeof(GridType), config[GridTypeKey]);
+            var rulesType = (RuleSetType) Enum.Parse(typeof(RuleSetType), config[RuleSetTypeKey]);
             
-            return new SimulationConfiguration(maxGenerations, animationDelay);
+            return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType);
         }
     }
 }

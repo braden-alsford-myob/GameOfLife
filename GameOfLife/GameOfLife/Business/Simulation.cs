@@ -1,4 +1,5 @@
 using System.Threading;
+using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.DataAccess;
 using GameOfLife.Presentation;
 
@@ -20,11 +21,18 @@ namespace GameOfLife.Business
             _animationDelay = config.AnimationDelay;
             _presenter = presenter;
             
-            // DEFINITELY FIX THIS TODO
-            _board = DemoBoardCreator.Create();
+            var gridFactory = new GridFactory();
+            var grid = gridFactory.Create(config.GridType);
+            
+            var ruleSetFactory = new RuleSetFactory();
+            var ruleset = ruleSetFactory.Create(config.RuleSetType);
+            
+            _board = new Board(ruleset, NeighbourFinderType.EdgeWrapping, grid);
+
+
         }
 
-        public void Excecute()
+        public void Execute()
         {
             while (_generationCount < _maximumGenerations)
             {
