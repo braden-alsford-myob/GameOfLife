@@ -5,11 +5,11 @@ namespace GameOfLife.DataAccess
 {
     public class RuleSetFactory
     {
-        public IRuleSet Create(RuleSetType type)
+        public IRuleSet Create(RuleSetTypes types)
         {
-            return type switch
+            return types switch
             {
-                RuleSetType.Basic => new BasicRuleSet(),
+                RuleSetTypes.Basic => new BasicRuleSet(),
                 _ => throw new Exception()
             };
         }

@@ -5,11 +5,11 @@ namespace GameOfLife.DataAccess
 {
     public class GridFactory
     {
-        public IGrid Create(GridType type)
+        public IGrid Create(GridTypes types)
         {
-            return type switch
+            return types switch
             {
-                GridType.Glider => new GliderGrid(),
+                GridTypes.Glider => new GliderGrid(),
                 _ => throw new Exception()
             };
         }

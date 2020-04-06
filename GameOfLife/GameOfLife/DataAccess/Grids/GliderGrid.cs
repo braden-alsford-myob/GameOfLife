@@ -5,9 +5,9 @@ namespace GameOfLife.DataAccess.Grids
 {
     public class GliderGrid : IGrid
     {
-        public GridType GetName()
+        public GridTypes GetName()
         {
-            return GridType.Glider;
+            return GridTypes.Glider;
         }
 
         public List<List<Cell>> GetGrid()

@@ -7,9 +7,9 @@ namespace GameOfLife.DataAccess.RuleSets
 {
     public class BasicRuleSet : IRuleSet
     {
-        public RuleSetType GetName()
+        public RuleSetTypes GetName()
         {
-            return RuleSetType.Basic;
+            return RuleSetTypes.Basic;
         }
 
         public RuleSet GetRuleSet()

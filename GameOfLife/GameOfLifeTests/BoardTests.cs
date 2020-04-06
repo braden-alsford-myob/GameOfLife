@@ -19,7 +19,7 @@ namespace GameOfLifeTests
         [SetUp]
         public void Setup()
         {
-            _basicRuleSet = new RuleSetFactory().Create(RuleSetType.Basic);
+            _basicRuleSet = new RuleSetFactory().Create(RuleSetTypes.Basic);
             _neighbourFinderType = NeighbourFinderType.EdgeWrapping;
         }
 
