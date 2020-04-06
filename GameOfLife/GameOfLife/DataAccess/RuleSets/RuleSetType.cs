@@ -1,6 +1,6 @@
 namespace GameOfLife.DataAccess.RuleSets
 {
-    public enum RuleSetTypes
+    public enum RuleSetType
     {
         Basic
     }

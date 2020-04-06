@@ -4,7 +4,7 @@ namespace GameOfLife.DataAccess.RuleSets
 {
     public interface IRuleSet
     {
-        public RuleSetTypes GetName();
+        public RuleSetType GetName();
         public RuleSet GetRuleSet();
     }
 }

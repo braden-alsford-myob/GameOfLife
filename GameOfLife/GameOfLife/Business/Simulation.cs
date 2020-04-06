@@ -22,10 +22,10 @@ namespace GameOfLife.Business
             _presenter = presenter;
             
             var gridFactory = new GridFactory();
-            var grid = gridFactory.Create(config.GridTypes);
+            var grid = gridFactory.Create(config.GridType);
             
             var ruleSetFactory = new RuleSetFactory();
-            var ruleset = ruleSetFactory.Create(config.RuleSetTypes);
+            var ruleset = ruleSetFactory.Create(config.RuleSetType);
             
             _board = new Board(ruleset, NeighbourFinderType.EdgeWrapping, grid);
 

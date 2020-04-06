@@ -21,8 +21,8 @@ namespace GameOfLife.DataAccess
 
             var maxGenerations = int.Parse(config[MaxGenerationsKey]);
             var animationDelay = int.Parse(config[AnimationDelayKey]);
-            var gridType = (GridTypes) Enum.Parse(typeof(GridTypes), config[GridTypeKey]);
-            var rulesType = (RuleSetTypes) Enum.Parse(typeof(RuleSetTypes), config[RuleSetTypeKey]);
+            var gridType = (GridType) Enum.Parse(typeof(GridType), config[GridTypeKey]);
+            var rulesType = (RuleSetType) Enum.Parse(typeof(RuleSetType), config[RuleSetTypeKey]);
             
             return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType);
         }

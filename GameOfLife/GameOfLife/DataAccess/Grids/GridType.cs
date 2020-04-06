@@ -1,6 +1,6 @@
 namespace GameOfLife.DataAccess.Grids
 {
-    public enum GridTypes
+    public enum GridType
     {
         Glider
     }

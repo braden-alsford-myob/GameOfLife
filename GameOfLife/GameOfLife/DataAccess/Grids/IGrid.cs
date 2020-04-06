@@ -5,7 +5,7 @@ namespace GameOfLife.DataAccess.Grids
 {
     public interface IGrid
     {
-        public GridTypes GetName();
+        public GridType GetName();
         public List<List<Cell>> GetGrid();
     }
 }
