@@ -2,6 +2,7 @@ namespace GameOfLife.DataAccess.RuleSets
 {
     public enum RuleSetType
     {
-        Basic
+        Basic,
+        PopulationGrowth
     }
 }

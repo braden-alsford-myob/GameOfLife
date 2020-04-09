@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.NeighbourFinder;
-using GameOfLife.DataAccess;
 using GameOfLife.DataAccess.Grids;
 using GameOfLife.DataAccess.RuleSets;
 

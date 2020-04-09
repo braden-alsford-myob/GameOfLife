@@ -10,6 +10,7 @@ namespace GameOfLife.DataAccess
             return type switch
             {
                 RuleSetType.Basic => new BasicRuleSet(),
+                RuleSetType.PopulationGrowth => new PopulationGrowthRuleSet(),
                 _ => throw new Exception()
             };
         }

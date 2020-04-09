@@ -10,6 +10,7 @@ namespace GameOfLife.DataAccess
             return type switch
             {
                 GridType.Glider => new GliderGrid(),
+                GridType.Tumbler => new TumblerGrid(),
                 _ => throw new Exception()
             };
         }

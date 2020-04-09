@@ -30,7 +30,7 @@ namespace GameOfLife.DataAccess
             return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType);
         }
 
-        private static void Validate(IConfigurationRoot config)
+        private static void Validate(IConfiguration config)
         {
             ValidatePositiveInteger(config[MaxGenerationsKey], MaxGenerationsKey);
             ValidatePositiveInteger(config[AnimationDelayKey], AnimationDelayKey);

@@ -2,6 +2,7 @@ namespace GameOfLife.DataAccess.Grids
 {
     public enum GridType
     {
-        Glider
+        Glider,
+        Tumbler
     }
 }

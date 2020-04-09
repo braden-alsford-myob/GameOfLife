@@ -7,7 +7,7 @@ namespace GameOfLife.Presentation
 {
     public class CommandLinePresenter : IPresenter
     {
-        private const string AliveRepresentation = "🧻 ";
+        private const string AliveRepresentation = "🦠 ";
         private const string DeadRepresentation = "   ";
 
         public void Display(ReadOnlyGrid grid)
