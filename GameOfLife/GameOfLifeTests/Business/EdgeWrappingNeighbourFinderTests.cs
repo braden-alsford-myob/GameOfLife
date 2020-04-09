@@ -5,7 +5,7 @@ using GameOfLife.Business.Cell;
 using GameOfLife.Business.NeighbourFinder;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Business
 {
     public class EdgeWrappingNeighbourFinderTests
     {

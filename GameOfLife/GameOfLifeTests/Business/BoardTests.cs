@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using GameOfLife;
 using GameOfLife.Business;
 using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.DataAccess;
@@ -9,7 +7,7 @@ using GameOfLifeTests.Helpers;
 using Moq;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Business
 {
     public class BoardTests
     {

@@ -1,8 +1,7 @@
-using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Business
 {
     public class CellTests
     {
