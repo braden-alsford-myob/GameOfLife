@@ -1,4 +1,4 @@
-namespace GameOfLife.Business
+namespace GameOfLife.Business.Cell
 {
     public enum CellState
     {

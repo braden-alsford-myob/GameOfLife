@@ -1,12 +1,18 @@
-﻿using System;
+﻿using GameOfLife.Business;
+using GameOfLife.DataAccess;
+using GameOfLife.Presentation;
 
 namespace GameOfLife
 {
     class Program
     {
+        private const string ConfigFileName = "simulationConfig.json";
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var simulationConfig = ConfigurationLoader.LoadSimulationConfiguration(ConfigFileName);
+            var simulation = new Simulation(simulationConfig, new CommandLinePresenter());
+            simulation.Execute();
         }
     }
 }

@@ -3,11 +3,28 @@ using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
 
-namespace GameOfLifeTests.Helpers
+namespace GameOfLife.DataAccess.RuleSets
 {
-    public static class RuleCreator
+    public class BasicRuleSet : IRuleSet
     {
-        public static Rule GetOvercrowdingRule()
+        public RuleSetType GetName()
+        {
+            return RuleSetType.Basic;
+        }
+
+        public RuleSet GetRuleSet()
+        {
+            var basicRules = new Dictionary<int, Rule>
+            {
+                {1, GetReproductionRule()},
+                {2, GetOvercrowdingRule()},
+                {3, GetUnderpopulationRule()}
+            };
+            
+            return new RuleSet(basicRules);
+        }
+        
+        private static Rule GetOvercrowdingRule()
         {
             var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
             var moreThanThreeNeighboursRequirement = new ActiveNeighbourRequirement(new HashSet<int>{4, 5, 6, 7, 8});
@@ -16,7 +33,7 @@ namespace GameOfLifeTests.Helpers
             return new Rule(requirements, CellState.Dead);
         }
 
-        public static Rule GetUnderpopulationRule()
+        private static Rule GetUnderpopulationRule()
         {
             var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
             var lessThanTwoNeighbourRequirement = new ActiveNeighbourRequirement(new HashSet<int>{0, 1});
@@ -25,7 +42,7 @@ namespace GameOfLifeTests.Helpers
             return new Rule(requirements, CellState.Dead);
         }
 
-        public static Rule GetReproductionRule()
+        private static Rule GetReproductionRule()
         {
             var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Dead});
             var threeNeighbourRequirements = new ActiveNeighbourRequirement(new HashSet<int>{3});

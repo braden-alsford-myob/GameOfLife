@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Moq" Version="4.13.1" />
         <PackageReference Include="nunit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
@@ -16,4 +17,22 @@
       <ProjectReference Include="..\GameOfLife\GameOfLife.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="validappsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="invalidGridType.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="invalidMaxGenerationsType.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="missingConfigurationElement.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>        
+        <None Update="negativeMaxGenerations.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    
 </Project>

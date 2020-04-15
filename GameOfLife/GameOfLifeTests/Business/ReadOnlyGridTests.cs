@@ -1,7 +1,7 @@
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Business
 {
     public class ReadOnlyGridTests
     {

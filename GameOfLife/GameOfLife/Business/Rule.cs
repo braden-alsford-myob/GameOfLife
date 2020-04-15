@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
 
 namespace GameOfLife.Business

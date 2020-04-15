@@ -3,7 +3,7 @@ using GameOfLife.Business.Requirements;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.RuleTests
+namespace GameOfLifeTests.Business.RuleTests
 {
     public class ActiveNeighborRequirementTests
     {

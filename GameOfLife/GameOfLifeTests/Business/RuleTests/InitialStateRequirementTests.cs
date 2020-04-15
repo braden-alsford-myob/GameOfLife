@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.RuleTests
+namespace GameOfLifeTests.Business.RuleTests
 {
     public class InitialStateRequirementTests
     {

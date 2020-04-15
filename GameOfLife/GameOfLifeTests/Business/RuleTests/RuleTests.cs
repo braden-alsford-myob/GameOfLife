@@ -1,8 +1,9 @@
 using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.RuleTests
+namespace GameOfLifeTests.Business.RuleTests
 {
     public class RuleTests
     {
