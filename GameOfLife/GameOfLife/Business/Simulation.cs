@@ -8,8 +8,7 @@ namespace GameOfLife.Business
     public class Simulation
     {
         private int _generationCount;
-        private readonly int _maximumGenerations;
-        private readonly int _animationDelay;
+        private readonly SimulationConfiguration _config;
         private readonly IPresenter _presenter;
 
         private readonly Board _board;
@@ -17,8 +16,7 @@ namespace GameOfLife.Business
         public Simulation(SimulationConfiguration config, IPresenter presenter)
         {
             _generationCount = 0;
-            _maximumGenerations = config.MaximumGenerations;
-            _animationDelay = config.AnimationDelay;
+            _config = config;
             _presenter = presenter;
             
             var gridFactory = new GridFactory();
@@ -32,10 +30,10 @@ namespace GameOfLife.Business
 
         public void Execute()
         {
-            while (_generationCount < _maximumGenerations)
+            while (_generationCount < _config.MaximumGenerations)
             {
                 _presenter.Display(_board.GetGrid());
-                Thread.Sleep(_animationDelay);
+                Thread.Sleep(_config.AnimationDelay);
                 _board.UpdateToNextGeneration();
                 Tick();
             }
