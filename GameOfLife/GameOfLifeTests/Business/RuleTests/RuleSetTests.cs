@@ -31,28 +31,25 @@ namespace GameOfLifeTests.Business.RuleTests
             _ruleSet = new RuleSet(rules);
         }
 
-        [Test]
-        public void It_Should_Return_Dead_Given_A_Dead_Cell_Not_Meeting_Any_SubRules()
-        {
-            var allDeadGrid = GridCreator.GetAllDeadGrid();
-            var nextState = _ruleSet.GetNextCellState(allDeadGrid);
-            Assert.AreEqual(CellState.Dead, nextState);
-        }
 
-        [Test]
-        public void It_Should_Return_Dead_Given_A_Cell_Meeting_Overcrowding_Rule_Only()
+        [Test, TestCaseSource(nameof(RuleGrids))]
+        public void GetNextCellState_Should_Return_Next_State_Given_Different_Grids(ReadOnlyGrid grid, CellState expectedState)
         {
-            var aliveCenterWithFourAliveNeighboursGrid = GridCreator.GetAliveCenterWithFourAliveNeighboursGrid();
-            var nextState = _ruleSet.GetNextCellState(aliveCenterWithFourAliveNeighboursGrid);
-            Assert.AreEqual(CellState.Dead, nextState);
+            var nextState = _ruleSet.GetNextCellState(grid);
+            
+            Assert.AreEqual(expectedState, nextState);
         }
-
-        [Test]
-        public void It_Should_Return_Alive_Given_A_Cell_Meeting_Both_Rules_And_SuperOvercrowding_Is_Prioritized()
+        
+        
+        
+        private static IEnumerable<TestCaseData> RuleGrids
         {
-            var allAliveGrid = GridCreator.GetAllAliveGrid();
-            var nextState = _ruleSet.GetNextCellState(allAliveGrid);
-            Assert.AreEqual(CellState.Alive, nextState);
+            get
+            {
+                yield return new TestCaseData(GridCreator.GetAllDeadGrid(), CellState.Dead);
+                yield return new TestCaseData(GridCreator.GetAliveCenterWithFourAliveNeighboursGrid(), CellState.Dead);
+                yield return new TestCaseData(GridCreator.GetAllAliveGrid(), CellState.Alive);
+            }
         }
     }
 }
