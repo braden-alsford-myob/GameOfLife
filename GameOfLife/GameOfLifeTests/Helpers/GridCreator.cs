@@ -113,6 +113,27 @@ namespace GameOfLifeTests.Helpers
             return new ReadOnlyGrid(aliveCenterWithFourAliveNeighboursReadOnlyGrid);
         }
 
+        public static ReadOnlyGrid GetAliveTopLeftGrid()
+        {
+            var onlyLeftAliveRow = new List<ReadOnlyCell>
+            {
+                new ReadOnlyCell(CellState.Alive),
+                new ReadOnlyCell(CellState.Dead),
+                new ReadOnlyCell(CellState.Dead)
+            };
+            
+            var aliveTopLeftGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
+            {
+                new ReadOnlyCollection<ReadOnlyCell>(onlyLeftAliveRow),
+                new ReadOnlyCollection<ReadOnlyCell>(AllDeadRow),
+                new ReadOnlyCollection<ReadOnlyCell>(AllDeadRow),
+            };
+            
+            var aliveTopLeftReadOnlyGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveTopLeftGrid);
+            
+            return new ReadOnlyGrid(aliveTopLeftReadOnlyGrid);
+        }
+
         public static ReadOnlyGrid GetTwoRowAllAliveGrid()
         {
             var twoRowAllAliveGrid = new List<ReadOnlyCollection<ReadOnlyCell>>

@@ -14,69 +14,44 @@ namespace GameOfLifeTests.Business
         [SetUp]
         public void Setup()
         {
-            var aliveCellLeftRow = new List<ReadOnlyCell>
+            var aliveReadOnlyCenterCellGrid = Helpers.GridCreator.GetAliveTopLeftGrid();
+            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
+        }
+
+        
+        [Test, TestCaseSource(nameof(CellPositions))]
+        public void NeighbourFinder_Should_Find_Wrapped_Neighbours(CellPosition targetCell, CellPosition expectedAliveCell)
+        {
+            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(targetCell);
+
+            var expectedAliveCellState = neighbours.GetCellState(expectedAliveCell);
+            Assert.AreEqual(CellState.Alive, expectedAliveCellState);
+        }
+        
+        private static IEnumerable<TestCaseData> CellPositions
+        {
+            get
             {
-                new ReadOnlyCell(CellState.Alive),
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead)
-            };
-            
-            var allDeadRow = new List<ReadOnlyCell>
-            {
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead)
-            };
-            
-            var aliveCenterCellGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
-            {
-                new ReadOnlyCollection<ReadOnlyCell>(aliveCellLeftRow),
-                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow),
-                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow)
-            };
-            
-            var aliveReadOnlyCenterCellGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveCenterCellGrid);
-            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(new ReadOnlyGrid(aliveReadOnlyCenterCellGrid));
-        }
-        
-        [Test]
-        public void It_Should_Return_The_Active_Cell_In_The_Middle_Of_The_Neighbours_Grid_Given_The_Top_Left_Cell() {
-            var centerCell = new CellPosition(0, 0);
-            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
-            
-            Assert.AreEqual(CellState.Alive, neighbours.Grid[1][1].GetState());
-        }
-        
-        [Test]
-        public void It_Should_Return_The_Active_Cell_In_The_Middle_Right_Of_The_Neighbours_Grid_Given_The_Top_Right_Cell() {
-            var centerCell = new CellPosition(0, 2);
-            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
-            
-            Assert.AreEqual(CellState.Alive, neighbours.Grid[1][2].GetState());
-        }
-        
-        [Test]
-        public void It_Should_Return_The_Active_Cell_In_The_Bottom_Right_Of_The_Neighbours_Grid_Given_The_Bottom_Right_Cell() {
-            var centerCell = new CellPosition(2, 2);
-            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
-            
-            Assert.AreEqual(CellState.Alive, neighbours.Grid[2][2].GetState());
-        }
-        
-        [Test]
-        public void It_Should_Return_The_Active_Cell_In_The_Bottom_Center_Of_The_Neighbours_Grid_Given_The_Bottom_Left_Cell() {
-            var centerCell = new CellPosition(2, 0);
-            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
-            
-            Assert.AreEqual(CellState.Alive, neighbours.Grid[2][1].GetState());
-        }
-        
-        [Test]
-        public void It_Should_Return_The_Active_Cell_In_The_Top_Right_Of_The_Neighbours_Grid_Given_The_Center_Cell() {
-            var centerCell = new CellPosition(1, 1);
-            var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(centerCell);
-            
-            Assert.AreEqual(CellState.Alive, neighbours.Grid[0][0].GetState());
+                yield return new TestCaseData(
+                    new CellPosition(0, 0), 
+                    new CellPosition(1, 1));
+                
+                yield return new TestCaseData(
+                    new CellPosition(0, 2), 
+                    new CellPosition(1, 2));
+
+                yield return new TestCaseData(
+                    new CellPosition(2, 2), 
+                    new CellPosition(2, 2));
+
+                yield return new TestCaseData(
+                    new CellPosition(2, 0), 
+                    new CellPosition(2, 1));
+
+                yield return new TestCaseData(
+                    new CellPosition(1, 1), 
+                    new CellPosition(0, 0));
+            }
         }
     }
 }

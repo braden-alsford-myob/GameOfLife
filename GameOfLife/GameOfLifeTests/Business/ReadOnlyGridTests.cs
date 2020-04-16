@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using GameOfLife.Business;
+using GameOfLife.Business.Cell;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
@@ -5,35 +8,24 @@ namespace GameOfLifeTests.Business
 {
     public class ReadOnlyGridTests
     {
-        [Test]
-        public void It_Should_Return_True_For_An_Identical_ReadOnlyGrid()
+        
+        [Test, TestCaseSource(nameof(Grids))]
+        public void GetNextCellState_Should_Return_Next_State_Given_Different_Grids(ReadOnlyGrid grid, bool expected)
         {
             var allAliveGrid = GridCreator.GetAllAliveGrid();
-            Assert.True(allAliveGrid.Equals(allAliveGrid));
+            
+            Assert.AreEqual(expected, allAliveGrid.Equals(grid));
         }
         
-        [Test]
-        public void It_Should_Return_False_For_A_Subtly_Different_ReadOnlyGrid()
+        private static IEnumerable<TestCaseData> Grids
         {
-            var allAliveGrid = GridCreator.GetAllAliveGrid();
-            var onlyDeadCenterGrid = GridCreator.GetOnlyDeadCenterGrid();
-            Assert.False(allAliveGrid.Equals(onlyDeadCenterGrid));
-        }
-        
-        [Test]
-        public void It_Should_Return_False_Given_A_ReadOnlyGrid_Of_Different_Size()
-        {
-            var allAliveGrid = GridCreator.GetAllAliveGrid();
-            var twoRowAllAliveGrid = GridCreator.GetTwoRowAllAliveGrid();
-            Assert.False(allAliveGrid.Equals(twoRowAllAliveGrid));
-        }
-        
-        [Test]
-        public void It_Should_Return_False_For_A_Completely_Different_ReadOnlyGrid()
-        {
-            var allAliveGrid = GridCreator.GetAllAliveGrid();
-            var allDeadGrid = GridCreator.GetAllDeadGrid();
-            Assert.False(allAliveGrid.Equals(allDeadGrid));
+            get
+            {
+                yield return new TestCaseData(GridCreator.GetAllAliveGrid(), true);
+                yield return new TestCaseData(GridCreator.GetOnlyDeadCenterGrid(), false);
+                yield return new TestCaseData(GridCreator.GetTwoRowAllAliveGrid(), false);
+                yield return new TestCaseData(GridCreator.GetAllDeadGrid(), false);
+            }
         }
     }
 }

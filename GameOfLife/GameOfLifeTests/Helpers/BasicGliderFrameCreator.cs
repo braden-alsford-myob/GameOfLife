@@ -1,12 +1,25 @@
+using System;
 using System.Collections.Generic;
-using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 
 namespace GameOfLifeTests.Helpers
 {
     public static class BasicGliderFrameCreator
     {
-        public static List<List<Cell>> GetFrameOne()
+        public static List<List<Cell>> GetFrame(int frameNumber)
+        {
+            return frameNumber switch
+            {
+                1 => GetFrameOne(),
+                2 => GetFrameTwo(),
+                3 => GetFrameThree(),
+                4 => GetFrameFour(),
+                5 => GetFrameFive(),
+                _ => throw new Exception()
+            };
+        }
+
+        private static List<List<Cell>> GetFrameOne()
         {
             var rowOne = new List<Cell>
             {
@@ -63,7 +76,7 @@ namespace GameOfLifeTests.Helpers
             };
         }
 
-        public static List<List<Cell>> GetFrameTwo()
+        private static List<List<Cell>> GetFrameTwo()
         {
             var rowOne = new List<Cell>
             {
@@ -120,7 +133,7 @@ namespace GameOfLifeTests.Helpers
             };
         }
 
-        public static List<List<Cell>> GetFrameThree()
+        private static List<List<Cell>> GetFrameThree()
         {
             var rowOne = new List<Cell>
             {
@@ -177,7 +190,7 @@ namespace GameOfLifeTests.Helpers
             };
         }
 
-        public static List<List<Cell>> GetFrameFour()
+        private static List<List<Cell>> GetFrameFour()
         {
             var rowOne = new List<Cell>
             {
@@ -234,7 +247,7 @@ namespace GameOfLifeTests.Helpers
             };
         }
 
-        public static List<List<Cell>> GetFrameFive()
+        private static List<List<Cell>> GetFrameFive()
         {
             var rowOne = new List<Cell>
             {
