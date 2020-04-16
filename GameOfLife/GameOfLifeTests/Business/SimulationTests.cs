@@ -5,7 +5,7 @@ using GameOfLife.Presentation;
 using Moq;
 using NUnit.Framework;
 
-namespace GameOfLifeTests
+namespace GameOfLifeTests.Business
 {
     public class SimulationTests
     {

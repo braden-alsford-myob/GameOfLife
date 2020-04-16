@@ -18,21 +18,40 @@ namespace GameOfLifeTests.Business
             _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
         }
 
-
-        [TestCase(0, 0, 1, 1)]
-        [TestCase(0, 2, 1, 2)]
-        [TestCase(2, 2, 2, 2)]
-        [TestCase(2, 0, 2, 1)]
-        [TestCase(1, 1, 0, 0)]
         
-        public void NeighbourFinder_Should_Find_Wrapped_Neighbours(int targetRow, int targetColumn, int expectedAliveCellRow, int expectedAliveCellColumn)
+        [Test, TestCaseSource(nameof(CellPositions))]
+        public void NeighbourFinder_Should_Find_Wrapped_Neighbours(CellPosition targetCell, CellPosition expectedAliveCell)
         {
-            var targetCell = new CellPosition(targetRow, targetColumn);
-            
             var neighbours = _edgeWrappingNeighbourFinder.GetThreeByThreeGridAroundCell(targetCell);
 
-            var expectedAliveCell = neighbours.Grid[expectedAliveCellRow][expectedAliveCellColumn];
-            Assert.AreEqual(CellState.Alive, expectedAliveCell.GetState());
+            var expectedAliveCellState = neighbours.GetCellState(expectedAliveCell);
+            Assert.AreEqual(CellState.Alive, expectedAliveCellState);
+        }
+        
+        private static IEnumerable<TestCaseData> CellPositions
+        {
+            get
+            {
+                yield return new TestCaseData(
+                    new CellPosition(0, 0), 
+                    new CellPosition(1, 1));
+                
+                yield return new TestCaseData(
+                    new CellPosition(0, 2), 
+                    new CellPosition(1, 2));
+
+                yield return new TestCaseData(
+                    new CellPosition(2, 2), 
+                    new CellPosition(2, 2));
+
+                yield return new TestCaseData(
+                    new CellPosition(2, 0), 
+                    new CellPosition(2, 1));
+
+                yield return new TestCaseData(
+                    new CellPosition(1, 1), 
+                    new CellPosition(0, 0));
+            }
         }
     }
 }

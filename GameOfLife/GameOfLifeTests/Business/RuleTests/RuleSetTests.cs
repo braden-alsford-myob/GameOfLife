@@ -31,7 +31,6 @@ namespace GameOfLifeTests.Business.RuleTests
             _ruleSet = new RuleSet(rules);
         }
 
-
         [Test, TestCaseSource(nameof(RuleGrids))]
         public void GetNextCellState_Should_Return_Next_State_Given_Different_Grids(ReadOnlyGrid grid, CellState expectedState)
         {
@@ -39,8 +38,6 @@ namespace GameOfLifeTests.Business.RuleTests
             
             Assert.AreEqual(expectedState, nextState);
         }
-        
-        
         
         private static IEnumerable<TestCaseData> RuleGrids
         {
