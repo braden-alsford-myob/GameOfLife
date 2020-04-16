@@ -14,30 +14,11 @@ namespace GameOfLifeTests.Business
         [SetUp]
         public void Setup()
         {
-            var aliveCellLeftRow = new List<ReadOnlyCell>
-            {
-                new ReadOnlyCell(CellState.Alive),
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead)
-            };
-            
-            var allDeadRow = new List<ReadOnlyCell>
-            {
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead),
-                new ReadOnlyCell(CellState.Dead)
-            };
-            
-            var aliveCenterCellGrid = new List<ReadOnlyCollection<ReadOnlyCell>>
-            {
-                new ReadOnlyCollection<ReadOnlyCell>(aliveCellLeftRow),
-                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow),
-                new ReadOnlyCollection<ReadOnlyCell>(allDeadRow)
-            };
-            
-            var aliveReadOnlyCenterCellGrid = new ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>>(aliveCenterCellGrid);
-            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(new ReadOnlyGrid(aliveReadOnlyCenterCellGrid));
+            var aliveReadOnlyCenterCellGrid = Helpers.GridCreator.GetAliveTopLeftGrid();
+            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
         }
+
+        
         
         [Test]
         public void It_Should_Return_The_Active_Cell_In_The_Middle_Of_The_Neighbours_Grid_Given_The_Top_Left_Cell() {

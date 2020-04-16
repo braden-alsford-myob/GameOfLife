@@ -20,58 +20,21 @@ namespace GameOfLifeTests.Business
             _basicRuleSet = new RuleSetFactory().Create(RuleSetType.Basic);
             _neighbourFinderType = NeighbourFinderType.EdgeWrapping;
         }
+        
 
-        [Test]
-        public void It_Should_Successfully_Update_From_Frame_One_To_Frame_Two_Given_A_Basic_Ruleset()
+        [TestCase(1, 2)]
+        [TestCase(2, 3)]
+        [TestCase(3, 4)]
+        [TestCase(4, 5)]
+
+        public void Board_Successfully_Updates_From_Frame_To_Frame(int startingFrame, int expectedFrame)
         {
             var mockGrid = new Mock<IGrid>();
-            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrameOne);
+            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrame(startingFrame));
             
             var board = new Board(_basicRuleSet, _neighbourFinderType, mockGrid.Object);
             board.UpdateToNextGeneration();
-            var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrameTwo());
-            var actualGrid = board.GetGrid();
-            
-            Assert.True(expectedGrid.Equals(actualGrid));
-        }
-        
-        [Test]
-        public void It_Should_Successfully_Update_From_Frame_Two_To_Frame_Three_Given_A_Basic_Ruleset()
-        {
-            var mockGrid = new Mock<IGrid>();
-            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrameTwo);
-            
-            var board = new Board(_basicRuleSet, _neighbourFinderType, mockGrid.Object);
-            board.UpdateToNextGeneration();
-            var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrameThree());
-            var actualGrid = board.GetGrid();
-            
-            Assert.True(expectedGrid.Equals(actualGrid));
-        }
-        
-        [Test]
-        public void It_Should_Successfully_Update_From_Frame_Three_To_Frame_Four_Given_A_Basic_Ruleset()
-        {
-            var mockGrid = new Mock<IGrid>();
-            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrameThree);
-            
-            var board = new Board(_basicRuleSet, _neighbourFinderType, mockGrid.Object);
-            board.UpdateToNextGeneration();
-            var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrameFour());
-            var actualGrid = board.GetGrid();
-            
-            Assert.True(expectedGrid.Equals(actualGrid));
-        }
-        
-        [Test]
-        public void It_Should_Successfully_Update_From_Frame_Four_To_Frame_Five_Given_A_Basic_Ruleset()
-        {
-            var mockGrid = new Mock<IGrid>();
-            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrameFour);
-            
-            var board = new Board(_basicRuleSet, _neighbourFinderType, mockGrid.Object);
-            board.UpdateToNextGeneration();
-            var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrameFive());
+            var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrame(expectedFrame));
             var actualGrid = board.GetGrid();
             
             Assert.True(expectedGrid.Equals(actualGrid));
