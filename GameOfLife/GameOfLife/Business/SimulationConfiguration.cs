@@ -1,5 +1,5 @@
 using GameOfLife.Business.Grid;
-using GameOfLife.DataAccess.RuleSets;
+using GameOfLife.Business.RuleSet;
 
 namespace GameOfLife.Business
 {

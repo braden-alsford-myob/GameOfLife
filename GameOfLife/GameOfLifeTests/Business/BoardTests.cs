@@ -1,17 +1,15 @@
 using GameOfLife.Business;
 using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
-using GameOfLife.DataAccess;
-using GameOfLife.DataAccess.RuleSets;
+using GameOfLife.Business.RuleSet;
 using GameOfLifeTests.Helpers;
-using Moq;
 using NUnit.Framework;
 
 namespace GameOfLifeTests.Business
 {
     public class BoardTests
     {
-        private IRuleSet _basicRuleSet;
+        private RuleSet _basicRuleSet;
         private NeighbourFinderType _neighbourFinderType;
 
         [SetUp]

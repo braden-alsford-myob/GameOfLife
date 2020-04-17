@@ -2,19 +2,18 @@ using System;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
-using GameOfLife.DataAccess.RuleSets;
 
 namespace GameOfLife.Business
 {
     public class Board
     {
-        private readonly RuleSet _ruleset;
+        private readonly RuleSet.RuleSet _ruleset;
         private readonly NeighbourFinderType _neighbourFinderType;
         private readonly Grid.Grid _grid;
 
-        public Board(IRuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid.Grid grid)
+        public Board(RuleSet.RuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid.Grid grid)
         {
-            _ruleset = ruleset.GetRuleSet();
+            _ruleset = ruleset;
             _neighbourFinderType = neighbourFinderType;
             _grid = grid;
         }

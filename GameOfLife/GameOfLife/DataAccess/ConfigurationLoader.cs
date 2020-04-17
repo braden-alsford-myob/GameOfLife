@@ -2,7 +2,7 @@ using System;
 using GameOfLife.Business;
 using GameOfLife.Business.Exceptions;
 using GameOfLife.Business.Grid;
-using GameOfLife.DataAccess.RuleSets;
+using GameOfLife.Business.RuleSet;
 using Microsoft.Extensions.Configuration;
 
 namespace GameOfLife.DataAccess

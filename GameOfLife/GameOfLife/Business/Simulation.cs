@@ -1,5 +1,7 @@
 using System.Threading;
+using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
+using GameOfLife.Business.RuleSet;
 using GameOfLife.DataAccess;
 using GameOfLife.Presentation;
 

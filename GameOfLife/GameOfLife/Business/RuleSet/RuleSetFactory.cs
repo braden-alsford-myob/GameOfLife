@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
-using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Requirements;
 
-namespace GameOfLife.DataAccess.RuleSets
+namespace GameOfLife.Business.RuleSet
 {
-    public class BasicRuleSet : IRuleSet
+    public class RuleSetFactory
     {
-        public RuleSetType GetName()
+        public RuleSet Create(RuleSetType type)
         {
-            return RuleSetType.Basic;
+            return type switch
+            {
+                RuleSetType.Basic => GetBasicRuleSet(),
+                _ => throw new Exception()
+            };
         }
-
-        public RuleSet GetRuleSet()
+        
+        private static RuleSet GetBasicRuleSet()
         {
             var basicRules = new Dictionary<int, Rule>
             {

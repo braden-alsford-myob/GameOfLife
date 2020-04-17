@@ -3,7 +3,7 @@ using System.Linq;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 
-namespace GameOfLife.Business
+namespace GameOfLife.Business.RuleSet
 {
     public class RuleSet
     {

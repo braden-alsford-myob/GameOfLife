@@ -1,6 +1,6 @@
 using GameOfLife.Business;
 using GameOfLife.Business.Grid;
-using GameOfLife.DataAccess.RuleSets;
+using GameOfLife.Business.RuleSet;
 using GameOfLife.Presentation;
 using Moq;
 using NUnit.Framework;

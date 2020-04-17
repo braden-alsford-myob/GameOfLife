@@ -3,6 +3,7 @@ using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 using GameOfLife.Business.Requirements;
+using GameOfLife.Business.RuleSet;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 
