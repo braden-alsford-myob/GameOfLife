@@ -11,22 +11,22 @@ namespace GameOfLife.Business
     {
         private readonly RuleSet _ruleset;
         private readonly NeighbourFinderType _neighbourFinderType;
-        private readonly List<List<Cell.Cell>> _grid;
+        private readonly Grid _grid;
 
-        public Board(IRuleSet ruleset, NeighbourFinderType neighbourFinderType, IGrid grid)
+        public Board(IRuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid grid)
         {
             _ruleset = ruleset.GetRuleSet();
             _neighbourFinderType = neighbourFinderType;
-            _grid = grid.GetGrid();
+            _grid = grid;
         }
 
         public void UpdateToNextGeneration()
         {
             var neighbourFinder = CreateNeighbourFinder();
             
-            for (var i = 0; i < _grid.Count; i++)
+            for (var i = 0; i < _grid.Rows.Count; i++)
             {
-                for (var j = 0; j < _grid[i].Count; j++)
+                for (var j = 0; j < _grid.Rows[i].Count; j++)
                 {
                     UpdateCellState(new CellPosition(i, j), neighbourFinder);
                 }
@@ -51,9 +51,10 @@ namespace GameOfLife.Business
         {
             var neighbours = finder.GetThreeByThreeGridAroundCell(position);
             var newState = _ruleset.GetNextCellState(neighbours);
-
-            if (newState == CellState.Alive) _grid[position.Row][position.Column].Revive();
-            else _grid[position.Row][position.Column].Kill();
+            
+            
+            if (newState == CellState.Alive) _grid.Rows[position.Row][position.Column].Revive();
+            else _grid.Rows[position.Row][position.Column].Kill();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GameOfLife.Business.Cell;
+using GameOfLife.DataAccess.Grids;
 
 namespace GameOfLife.Business
 {
@@ -14,9 +15,9 @@ namespace GameOfLife.Business
             Grid = grid;
         }
 
-        public ReadOnlyGrid(List<List<Cell.Cell>> grid)
+        public ReadOnlyGrid(Grid grid)
         {
-            Grid = CreateReadOnlyGrid(grid);
+            Grid = CreateReadOnlyGrid(grid.Rows);
         }
 
         public CellState GetCellState(CellPosition position)
