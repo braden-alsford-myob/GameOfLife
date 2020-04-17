@@ -1,7 +1,7 @@
 using GameOfLife.Business;
+using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.DataAccess;
-using GameOfLife.DataAccess.Grids;
 using GameOfLife.DataAccess.RuleSets;
 using GameOfLifeTests.Helpers;
 using Moq;
@@ -29,10 +29,9 @@ namespace GameOfLifeTests.Business
 
         public void Board_Successfully_Updates_From_Frame_To_Frame(int startingFrame, int expectedFrame)
         {
-            var mockGrid = new Mock<IGrid>();
-            mockGrid.Setup(mock => mock.GetGrid()).Returns(BasicGliderFrameCreator.GetFrame(startingFrame));
-            
-            var board = new Board(_basicRuleSet, _neighbourFinderType, mockGrid.Object);
+            var grid = BasicGliderFrameCreator.GetFrame(startingFrame);
+
+            var board = new Board(_basicRuleSet, _neighbourFinderType, grid);
             board.UpdateToNextGeneration();
             var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrame(expectedFrame));
             var actualGrid = board.GetGrid();

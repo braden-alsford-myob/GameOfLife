@@ -1,5 +1,5 @@
 using GameOfLife.Business;
-using GameOfLife.DataAccess.Grids;
+using GameOfLife.Business.Grid;
 using GameOfLife.DataAccess.RuleSets;
 using GameOfLife.Presentation;
 using Moq;

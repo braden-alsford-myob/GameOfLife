@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Business.NeighbourFinder
 {
     public class EdgeWrappingNeighbourFinder : INeighbourFinder
     {
-        private readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> _grid;
+        private readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> _rows;
         
         private int _aboveRowIndex;
         private int _currentRowIndex;
@@ -17,7 +18,7 @@ namespace GameOfLife.Business.NeighbourFinder
         
         public EdgeWrappingNeighbourFinder(ReadOnlyGrid readOnlyGrid)
         {
-            _grid = readOnlyGrid.Grid;
+            _rows = readOnlyGrid.Rows;
         }
 
         public ReadOnlyGrid GetThreeByThreeGridAroundCell(CellPosition cellPosition)
@@ -50,9 +51,9 @@ namespace GameOfLife.Business.NeighbourFinder
         {
             return new List<ReadOnlyCell>
             {
-                _grid[_aboveRowIndex][_leftColumnIndex],
-                _grid[_aboveRowIndex][_currentColumnIndex],
-                _grid[_aboveRowIndex][_rightColumnIndex]
+                _rows[_aboveRowIndex][_leftColumnIndex],
+                _rows[_aboveRowIndex][_currentColumnIndex],
+                _rows[_aboveRowIndex][_rightColumnIndex]
             };
         }
         
@@ -60,9 +61,9 @@ namespace GameOfLife.Business.NeighbourFinder
         {
             return new List<ReadOnlyCell>
             {
-                _grid[_currentRowIndex][_leftColumnIndex],
-                _grid[_currentRowIndex][_currentColumnIndex],
-                _grid[_currentRowIndex][_rightColumnIndex]
+                _rows[_currentRowIndex][_leftColumnIndex],
+                _rows[_currentRowIndex][_currentColumnIndex],
+                _rows[_currentRowIndex][_rightColumnIndex]
             };
         }
         
@@ -70,33 +71,33 @@ namespace GameOfLife.Business.NeighbourFinder
         {
             return new List<ReadOnlyCell>
             {
-                _grid[_belowRowIndex][_leftColumnIndex],
-                _grid[_belowRowIndex][_currentColumnIndex],
-                _grid[_belowRowIndex][_rightColumnIndex]
+                _rows[_belowRowIndex][_leftColumnIndex],
+                _rows[_belowRowIndex][_currentColumnIndex],
+                _rows[_belowRowIndex][_rightColumnIndex]
             };
         }
         
         private int _getAboveRowIndex(int cellRowIndex)
         {
-            if (cellRowIndex - 1 < 0) return _grid.Count - 1;
+            if (cellRowIndex - 1 < 0) return _rows.Count - 1;
             return cellRowIndex - 1;
         }
         
         private int _getBelowRowIndex(int cellRowIndex)
         {
-            if (cellRowIndex + 1 > _grid.Count - 1) return 0;
+            if (cellRowIndex + 1 > _rows.Count - 1) return 0;
             return cellRowIndex + 1;
         }
         
         private int _getLeftColumnIndex(CellPosition cellPosition)
         {
-            if (cellPosition.Column - 1 < 0) return _grid[cellPosition.Row].Count - 1;
+            if (cellPosition.Column - 1 < 0) return _rows[cellPosition.Row].Count - 1;
             return cellPosition.Column - 1;
         }
         
         private int _getRightColumnIndex(CellPosition cellPosition)
         {
-            if (cellPosition.Column + 1 > _grid[cellPosition.Row].Count - 1) return 0;
+            if (cellPosition.Column + 1 > _rows[cellPosition.Row].Count - 1) return 0;
             return cellPosition.Column + 1;
         }
     }

@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLifeTests.Helpers
 {
     public static class BasicGliderFrameCreator
     {
-        public static List<List<Cell>> GetFrame(int frameNumber)
+        public static Grid GetFrame(int frameNumber)
         {
             return frameNumber switch
             {
-                1 => GetFrameOne(),
-                2 => GetFrameTwo(),
-                3 => GetFrameThree(),
-                4 => GetFrameFour(),
-                5 => GetFrameFive(),
+                1 => new Grid(GetFrameOne()),
+                2 => new Grid(GetFrameTwo()),
+                3 => new Grid(GetFrameThree()),
+                4 => new Grid(GetFrameFour()),
+                5 => new Grid(GetFrameFive()),
                 _ => throw new Exception()
             };
         }
