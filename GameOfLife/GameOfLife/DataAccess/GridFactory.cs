@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 
@@ -18,6 +17,7 @@ namespace GameOfLife.DataAccess
             };
         }
         
+        
         private List<List<Cell>> CreateGliderRows()
         {
             var rowOne = new List<Cell>
@@ -31,7 +31,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowTwo = new List<Cell>
             {
                 new Cell(CellState.Dead),
@@ -43,7 +43,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowThree = new List<Cell>
             {
                 new Cell(CellState.Dead),
@@ -115,7 +115,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             return new List<List<Cell>>
             {
                 rowOne,
@@ -128,7 +128,7 @@ namespace GameOfLife.DataAccess
                 rowEight
             };
         }
-        
+
         private static List<List<Cell>> CreateTumblerRows()
         {
             var rowZero = new List<Cell>
@@ -145,7 +145,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowOne = new List<Cell>
             {
                 new Cell(CellState.Dead),
@@ -160,7 +160,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowTwo = new List<Cell>
             {
                 new Cell(CellState.Dead),
@@ -175,7 +175,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             var rowThree = new List<Cell>
             {                
                 new Cell(CellState.Dead),
@@ -265,7 +265,7 @@ namespace GameOfLife.DataAccess
                 new Cell(CellState.Dead),
                 new Cell(CellState.Dead)
             };
-            
+
             return new List<List<Cell>>
             {
                 rowZero,
