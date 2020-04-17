@@ -1,4 +1,4 @@
-using GameOfLife.Business;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Presentation
 {

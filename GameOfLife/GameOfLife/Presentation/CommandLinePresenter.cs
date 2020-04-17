@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 
@@ -32,7 +31,7 @@ namespace GameOfLife.Presentation
             Write("|\n");
         }
 
-        private static void PrintCell(ReadOnlyCell cell)
+        private static void PrintCell(ICell cell)
         {
             Write(cell.GetState() == CellState.Alive ? AliveRepresentation : DeadRepresentation);
         }
