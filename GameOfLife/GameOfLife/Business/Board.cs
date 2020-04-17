@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
-using GameOfLife.DataAccess.Grids;
 using GameOfLife.DataAccess.RuleSets;
 
 namespace GameOfLife.Business
@@ -11,9 +10,9 @@ namespace GameOfLife.Business
     {
         private readonly RuleSet _ruleset;
         private readonly NeighbourFinderType _neighbourFinderType;
-        private readonly Grid _grid;
+        private readonly Grid.Grid _grid;
 
-        public Board(IRuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid grid)
+        public Board(IRuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid.Grid grid)
         {
             _ruleset = ruleset.GetRuleSet();
             _neighbourFinderType = neighbourFinderType;
@@ -24,9 +23,9 @@ namespace GameOfLife.Business
         {
             var neighbourFinder = CreateNeighbourFinder();
             
-            for (var i = 0; i < _grid.Rows.Count; i++)
+            for (var i = 0; i < _grid.GetRows().Count; i++)
             {
-                for (var j = 0; j < _grid.Rows[i].Count; j++)
+                for (var j = 0; j < _grid.GetRows()[i].Count; j++)
                 {
                     UpdateCellState(new CellPosition(i, j), neighbourFinder);
                 }
@@ -53,8 +52,8 @@ namespace GameOfLife.Business
             var newState = _ruleset.GetNextCellState(neighbours);
             
             
-            if (newState == CellState.Alive) _grid.Rows[position.Row][position.Column].Revive();
-            else _grid.Rows[position.Row][position.Column].Kill();
+            if (newState == CellState.Alive) _grid.GetRows()[position.Row][position.Column].Revive();
+            else _grid.GetRows()[position.Row][position.Column].Kill();
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Presentation
 {
@@ -14,7 +15,7 @@ namespace GameOfLife.Presentation
         {
             Clear();
 
-            foreach (var row in grid.Grid)
+            foreach (var row in grid.Rows)
             {
                 PrintRow(row);
             }
@@ -31,7 +32,7 @@ namespace GameOfLife.Presentation
             Write("|\n");
         }
 
-        private static void PrintCell(ICell cell)
+        private static void PrintCell(ReadOnlyCell cell)
         {
             Write(cell.GetState() == CellState.Alive ? AliveRepresentation : DeadRepresentation);
         }

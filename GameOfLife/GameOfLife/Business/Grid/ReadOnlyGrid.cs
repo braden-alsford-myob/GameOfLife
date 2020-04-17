@@ -1,36 +1,36 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GameOfLife.Business.Cell;
-using GameOfLife.DataAccess.Grids;
 
-namespace GameOfLife.Business
+namespace GameOfLife.Business.Grid
 {
     public class ReadOnlyGrid
     {
-        public readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> Grid;
+        public readonly ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> Rows;
 
-        public ReadOnlyGrid(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> grid)
+        public ReadOnlyGrid(ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> rows)
         {
-            Grid = grid;
+            Rows = rows;
         }
 
         public ReadOnlyGrid(Grid grid)
         {
-            Grid = CreateReadOnlyGrid(grid.Rows);
+            Rows = CreateReadOnlyGrid(grid.GetRows());
         }
 
         public CellState GetCellState(CellPosition position)
         {
-            return Grid[position.Row][position.Column].GetState();
+            return Rows[position.Row][position.Column].GetState();
         }
 
         public bool Equals(ReadOnlyGrid otherGrid)
         {
-            return SameSize(Grid, otherGrid.Grid) && SameStates(Grid, otherGrid.Grid);
+            return SameSize(Rows, otherGrid.Rows) && SameStates(Rows, otherGrid.Rows);
         }
 
-        private static ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> CreateReadOnlyGrid(List<List<Cell.Cell>> grid)
+        private static ReadOnlyCollection<ReadOnlyCollection<ReadOnlyCell>> CreateReadOnlyGrid(IEnumerable<IEnumerable<ICell>> grid)
         {
             var readOnlyRows = new List<ReadOnlyCollection<ReadOnlyCell>>();
             

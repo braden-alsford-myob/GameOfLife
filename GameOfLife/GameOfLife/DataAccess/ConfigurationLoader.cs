@@ -1,7 +1,7 @@
 using System;
 using GameOfLife.Business;
 using GameOfLife.Business.Exceptions;
-using GameOfLife.DataAccess.Grids;
+using GameOfLife.Business.Grid;
 using GameOfLife.DataAccess.RuleSets;
 using Microsoft.Extensions.Configuration;
 

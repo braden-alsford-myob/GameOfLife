@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using GameOfLife.Business;
 using GameOfLife.Business.Cell;
-using GameOfLife.DataAccess.Grids;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLife.DataAccess
 {

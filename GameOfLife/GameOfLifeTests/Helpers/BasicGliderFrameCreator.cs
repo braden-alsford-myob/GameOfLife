@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameOfLife.Business.Cell;
-using GameOfLife.DataAccess.Grids;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLifeTests.Helpers
 {

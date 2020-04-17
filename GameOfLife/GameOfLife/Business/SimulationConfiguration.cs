@@ -1,4 +1,4 @@
-using GameOfLife.DataAccess.Grids;
+using GameOfLife.Business.Grid;
 using GameOfLife.DataAccess.RuleSets;
 
 namespace GameOfLife.Business

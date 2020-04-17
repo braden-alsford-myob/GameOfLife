@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 using GameOfLife.Business.Requirements;
 
 namespace GameOfLife.Business

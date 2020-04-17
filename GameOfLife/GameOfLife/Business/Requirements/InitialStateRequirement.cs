@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife.Business.Cell;
+using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Business.Requirements
 {

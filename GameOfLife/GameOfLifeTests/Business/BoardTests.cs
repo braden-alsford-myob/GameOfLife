@@ -1,7 +1,7 @@
 using GameOfLife.Business;
+using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.DataAccess;
-using GameOfLife.DataAccess.Grids;
 using GameOfLife.DataAccess.RuleSets;
 using GameOfLifeTests.Helpers;
 using Moq;
