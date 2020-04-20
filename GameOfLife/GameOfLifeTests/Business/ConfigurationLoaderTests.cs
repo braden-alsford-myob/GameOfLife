@@ -7,7 +7,7 @@ using GameOfLife.DataAccess;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.DataAccess
+namespace GameOfLifeTests.Business
 {
     public class ConfigurationLoaderTests
     {

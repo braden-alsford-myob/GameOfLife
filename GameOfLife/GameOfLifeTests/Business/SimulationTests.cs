@@ -29,7 +29,7 @@ namespace GameOfLifeTests.Business
         [Test]
         public void Display_Should_Get_Called_Ten_Times_Given_A_MaxGenerations_Of_Ten()
         {
-            _spyPresenter.Verify(p => p.Display(It.IsAny<ReadOnlyGrid>()), Times.Exactly(10));
+            _spyPresenter.Verify(p => p.Display(It.IsAny<GenerationViewModel>()), Times.Exactly(10));
         }
     }
 }

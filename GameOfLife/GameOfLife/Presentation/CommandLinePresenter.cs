@@ -1,49 +1,60 @@
-using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using GameOfLife.Business;
 using GameOfLife.Business.Cell;
-using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Presentation
 {
     public class CommandLinePresenter : IPresenter
     {
-        private const string AliveRepresentation = "🦠 ";
-        private const string DeadRepresentation = "   ";
-
-        public void Display(ReadOnlyGrid grid)
+        private readonly IWriter _writer;
+        
+        public CommandLinePresenter(IWriter writer)
         {
-            Clear();
-
-            foreach (var row in grid.Rows)
+            _writer = writer;
+        }
+        
+        public void Display(GenerationViewModel generation)
+        {
+            _writer.Clear();
+            
+            foreach (var row in generation.Grid.Rows)
             {
                 PrintRow(row);
             }
-        }
-
-        private static void PrintRow(ReadOnlyCollection<ReadOnlyCell> row)
-        {
-            Write("|");
-            foreach (var cell in row)
-            {
-                PrintCell(cell);
-            }
             
-            Write("|\n");
+            PrintGenerationCount(generation.Count);
         }
 
-        private static void PrintCell(ICell cell)
+        private void PrintGenerationCount(int generationCount)
         {
-            Write(cell.GetState() == CellState.Alive ? AliveRepresentation : DeadRepresentation);
+            var generationCountOutput = string.Concat(
+                    OutputConstants.NewLine, 
+                    OutputConstants.GenerationCount, 
+                    generationCount);
+            
+            _writer.WriteLine(generationCountOutput);
         }
 
-        private static void Write(string content)
+        private void PrintRow(ReadOnlyCollection<ReadOnlyCell> cellsRow)
         {
-            Console.Write(content);
+            var row = OutputConstants.RowEdge;
+
+            foreach (var cell in cellsRow)
+            {
+                row += GetCellRepresentation(cell);
+            }
+
+            row += OutputConstants.RowEdge;
+
+            _writer.WriteLine(row);
         }
-        
-        private static void Clear()
+
+        private string GetCellRepresentation(ReadOnlyCell cell)
         {
-            Console.Clear();
+            return cell.GetState() == CellState.Alive
+                ? OutputConstants.AliveRepresentation
+                : OutputConstants.DeadRepresentation;
         }
     }
 }
