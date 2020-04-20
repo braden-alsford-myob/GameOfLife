@@ -59,16 +59,16 @@ namespace GameOfLifeTests.Business
         [Test, TestCaseSource(nameof(Configurations))]
         public void Simulation_Grid_Should_Change_Frame_To_Frame(SimulationConfiguration config)
         {
-            //ONLY starting grids that change every tick can be used in this test. Eg. Glider/Tumbler.
-
+            if (!IsInfiniteGrid(config.GridType)) return;
+            
             var simulation = new Simulation(config, _spyPresenter.Object, _spyTimer.Object);
             simulation.Execute();
-
+                
             for (var i = 0; i < _generationsDisplayed.Count - 1; i += 2)
             {
                 var generationI = _generationsDisplayed[i];
                 var generationIPlusOne = _generationsDisplayed[i + 1];
-
+                
                 Assert.False(generationI.Grid.Equals(generationIPlusOne.Grid));
             }
         }
@@ -101,6 +101,12 @@ namespace GameOfLifeTests.Business
                 yield return new TestCaseData(
                     new SimulationConfiguration(1000, 30, GridType.Tumbler, RuleSetType.Basic));
             }
+        }
+
+        private bool IsInfiniteGrid(GridType grid)
+        {
+            var verifiedInfiniteGrids = new List<GridType>{GridType.Glider, GridType.Tumbler};
+            return verifiedInfiniteGrids.Contains(grid);
         }
         
     }
