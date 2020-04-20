@@ -34,7 +34,9 @@ namespace GameOfLife.Business
         {
             while (_generationCount < _config.MaximumGenerations)
             {
-                _presenter.Display(_board.GetGrid());
+                var generationViewModel = new GenerationViewModel(_board.GetGrid(), _generationCount);
+                
+                _presenter.Display(generationViewModel);
                 Thread.Sleep(_config.AnimationDelay);
                 _board.UpdateToNextGeneration();
                 Tick();
