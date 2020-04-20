@@ -2,6 +2,7 @@ using System.Threading;
 using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.Business.RuleSet;
+using GameOfLife.Business.Timer;
 using GameOfLife.DataAccess;
 using GameOfLife.Presentation;
 
@@ -12,15 +13,17 @@ namespace GameOfLife.Business
         private int _generationCount;
         private readonly SimulationConfiguration _config;
         private readonly IPresenter _presenter;
+        private readonly ITimer _timer;
 
         private readonly Board _board;
 
-        public Simulation(SimulationConfiguration config, IPresenter presenter)
+        public Simulation(SimulationConfiguration config, IPresenter presenter, ITimer timer)
         {
             _generationCount = 0;
             _config = config;
             _presenter = presenter;
-            
+            _timer = timer;
+
             var gridFactory = new GridFactory();
             var grid = gridFactory.Create(config.GridType);
             
@@ -32,12 +35,12 @@ namespace GameOfLife.Business
 
         public void Execute()
         {
-            while (_generationCount < _config.MaximumGenerations)
+            while (_generationCount <= _config.MaximumGenerations)
             {
                 var generationViewModel = new GenerationViewModel(_board.GetGrid(), _generationCount);
                 
                 _presenter.Display(generationViewModel);
-                Thread.Sleep(_config.AnimationDelay);
+                _timer.Sleep(_config.AnimationDelay);
                 _board.UpdateToNextGeneration();
                 Tick();
             }
