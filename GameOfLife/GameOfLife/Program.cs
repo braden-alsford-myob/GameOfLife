@@ -1,4 +1,5 @@
 ﻿using GameOfLife.Business;
+using GameOfLife.Business.Timer;
 using GameOfLife.DataAccess;
 using GameOfLife.Presentation;
 
@@ -11,7 +12,7 @@ namespace GameOfLife
         static void Main(string[] args)
         {
             var simulationConfig = ConfigurationLoader.LoadSimulationConfiguration(ConfigFileName);
-            var simulation = new Simulation(simulationConfig, new CommandLinePresenter(new Writer()));
+            var simulation = new Simulation(simulationConfig, new CommandLinePresenter(new Writer()), new Timer());
             simulation.Execute();
         }
     }
