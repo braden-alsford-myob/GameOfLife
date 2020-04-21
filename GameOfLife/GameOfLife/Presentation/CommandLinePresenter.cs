@@ -1,5 +1,5 @@
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
 
@@ -17,37 +17,32 @@ namespace GameOfLife.Presentation
         public void Display(GenerationViewModel generation)
         {
             _writer.Clear();
+
+            var printableGeneration = "";
             
             foreach (var row in generation.Grid.Rows)
             {
-                PrintRow(row);
+                printableGeneration += GetPrintableRow(row);
             }
+
+            printableGeneration += GetPrintableGenerationCount(generation.Count);
             
-            PrintGenerationCount(generation.Count);
+            _writer.WriteLine(printableGeneration);
         }
 
-        private void PrintGenerationCount(int generationCount)
-        {
-            var generationCountOutput = string.Concat(
-                    OutputConstants.NewLine, 
-                    OutputConstants.GenerationCount, 
-                    generationCount);
-            
-            _writer.WriteLine(generationCountOutput);
-        }
-
-        private void PrintRow(ReadOnlyCollection<ReadOnlyCell> cellsRow)
+        private string GetPrintableRow(ReadOnlyCollection<ReadOnlyCell> cellsRow)
         {
             var row = OutputConstants.RowEdge;
-
+            
             foreach (var cell in cellsRow)
             {
                 row += GetCellRepresentation(cell);
             }
-
+            
             row += OutputConstants.RowEdge;
+            row += OutputConstants.NewLine;
 
-            _writer.WriteLine(row);
+            return row;
         }
 
         private string GetCellRepresentation(ReadOnlyCell cell)
@@ -55,6 +50,14 @@ namespace GameOfLife.Presentation
             return cell.GetState() == CellState.Alive
                 ? OutputConstants.AliveRepresentation
                 : OutputConstants.DeadRepresentation;
+        }
+        
+        private string GetPrintableGenerationCount(int generationCount)
+        {
+            return string.Concat(
+                OutputConstants.NewLine, 
+                OutputConstants.GenerationCount, 
+                generationCount);
         }
     }
 }
