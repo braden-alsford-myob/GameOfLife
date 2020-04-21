@@ -13,6 +13,8 @@ namespace GameOfLife.DataAccess
         private const string AnimationDelayKey = "Animation Delay";
         private const string GridTypeKey = "Grid Type";
         private const string RuleSetTypeKey = "Rule Set Type";
+        private const string Height = "Height";
+        private const string Width = "Width";
         
         public static SimulationConfiguration LoadSimulationConfiguration(string path)
         {
@@ -26,14 +28,19 @@ namespace GameOfLife.DataAccess
             var animationDelay = int.Parse(config[AnimationDelayKey]);
             var gridType = (GridType) Enum.Parse(typeof(GridType), config[GridTypeKey]);
             var rulesType = (RuleSetType) Enum.Parse(typeof(RuleSetType), config[RuleSetTypeKey]);
+            var height = int.Parse(config[Height]);
+            var width = int.Parse(config[Width]);
 
-            return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType);
+            return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType, height, width);
         }
 
         private static void Validate(IConfiguration config)
         {
             ValidatePositiveInteger(config[MaxGenerationsKey], MaxGenerationsKey);
             ValidatePositiveInteger(config[AnimationDelayKey], AnimationDelayKey);
+            
+            ValidatePositiveInteger(config[Height], Height);
+            ValidatePositiveInteger(config[Width], Width);
 
             ValidateGridEnum(config[GridTypeKey]);
             ValidateRuleSetEnum(config[RuleSetTypeKey]);

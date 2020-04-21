@@ -2,5 +2,7 @@
   "Maximum Generations" : "one hundred",
   "Animation Delay" : 250,
   "Grid Type" : "Glider",
-  "Rule Set Type": "Basic"
+  "Rule Set Type": "Basic",
+  "Height": 5,
+  "Width": 5
 }
