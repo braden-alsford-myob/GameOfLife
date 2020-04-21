@@ -6,85 +6,20 @@ namespace GameOfLife.Business.Grid
 {
     public class GridFactory
     {
-        public Grid Create(GridType type, int configHeight, int configWidth)
+        public Grid Create(GridType type, int height, int width)
         {
             var template = type switch
             {
-                GridType.Glider => new Grid(CreateGliderRows()),
-                GridType.Tumbler => new Grid(CreateTumblerRows()),
+                GridType.Glider => CreateGliderRows(),
+                GridType.Tumbler => CreateTumblerRows(),
                 _ => throw new Exception()
             };
 
-            var gridHeight = GetGridHeight(template.GetRows().Count, configHeight);
-            var gridWidth = GetGridWidth(template.GetRows()[0].Count, configWidth);
+            var grid = new Grid(height, width);
+            grid.AddTemplateToCenter(template);
 
-            var grid = GenerateEmptyGrid(gridWidth, gridHeight);
-            
-            return MergeGrids(template.GetRows(), grid);
+            return grid;
         }
-
-        private static int GetGridWidth(int templateWidth, int configWidth)
-        {
-            return configWidth < templateWidth ? templateWidth : configWidth;
-        }
-
-        private static int GetGridHeight(int templateHeight, int configHeight)
-        {
-            return configHeight < templateHeight ? templateHeight : configHeight;
-        }
-
-        private static List<List<Cell.Cell>> GenerateEmptyGrid(int width, int height)
-        {
-            var emptyGrid = new List<List<Cell.Cell>>();
-            
-            for (var i = 0; i < height; i++)
-            {
-                var row = new List<Cell.Cell>();
-
-                for (var j = 0; j < width; j++)
-                {
-                    row.Add(new Cell.Cell(CellState.Dead));
-                }
-                
-                emptyGrid.Add(row);
-            }
-
-            return emptyGrid;
-        }
-
-        private Grid MergeGrids(List<List<Cell.Cell>> template, List<List<Cell.Cell>> grid)
-        {
-            var templateHeight = template.Count;
-            var templateWidth = template[0].Count;
-            
-            var topLeftRowIndex = (grid.Count - templateHeight) / 2;
-            var topLeftColumnIndex = (grid[0].Count - templateWidth) / 2;
-
-            var templateRow = 0;
-
-            for (int i = topLeftRowIndex; i < topLeftRowIndex + templateHeight; i++)
-            {
-                var row = grid[i];
-                row.RemoveRange(topLeftColumnIndex,  templateWidth);
-                row.InsertRange(topLeftColumnIndex, template[templateRow]);
-                templateRow++;
-            }
-
-            return new Grid(grid);
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
 
         private List<List<Cell.Cell>> CreateGliderRows()
@@ -131,7 +66,7 @@ namespace GameOfLife.Business.Grid
                 new Cell.Cell(CellState.Dead),
                 new Cell.Cell(CellState.Dead),
                 new Cell.Cell(CellState.Dead),
-                new Cell.Cell(CellState.Dead),
+                new Cell.Cell(CellState.Dead)
             };
 
             return new List<List<Cell.Cell>>
