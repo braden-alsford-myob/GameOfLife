@@ -80,13 +80,13 @@ namespace GameOfLifeTests
             get
             {
                 yield return new TestCaseData(
-                    new SimulationConfiguration(10, 3000, GridType.Glider, RuleSetType.Basic));
+                    new SimulationConfiguration(10, 3000, GridType.Glider, RuleSetType.Basic, 5, 5));
                 
                 yield return new TestCaseData(
-                    new SimulationConfiguration(100, 300, GridType.Glider, RuleSetType.Basic));
+                    new SimulationConfiguration(100, 300, GridType.Glider, RuleSetType.Basic, 5, 5));
                 
                 yield return new TestCaseData(
-                    new SimulationConfiguration(1000, 30, GridType.Tumbler, RuleSetType.Basic));
+                    new SimulationConfiguration(1000, 30, GridType.Tumbler, RuleSetType.Basic, 5, 5));
             }
         }
     }

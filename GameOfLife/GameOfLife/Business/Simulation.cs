@@ -25,7 +25,7 @@ namespace GameOfLife.Business
             _timer = timer;
 
             var gridFactory = new GridFactory();
-            var grid = gridFactory.Create(config.GridType);
+            var grid = gridFactory.Create(config.GridType, config.Height, config.Width);
             
             var ruleSetFactory = new RuleSetFactory();
             var ruleset = ruleSetFactory.Create(config.RuleSetType);
