@@ -6,7 +6,7 @@ namespace GameOfLife.Business.Grid
 {
     public class GridFactory
     {
-        public Grid Create(GridType type, int height, int width)
+        public Grid Create(GridType type, int configHeight, int configWidth)
         {
             var template = type switch
             {
@@ -15,35 +15,28 @@ namespace GameOfLife.Business.Grid
                 _ => throw new Exception()
             };
 
-            return MergeTemplateWithFullGrid(template, height, width);
+            var gridHeight = GetGridHeight(template.GetRows().Count, configHeight);
+            var gridWidth = GetGridWidth(template.GetRows()[0].Count, configWidth);
+
+            var grid = GenerateEmptyGrid(gridWidth, gridHeight);
+            
+            return MergeGrids(template.GetRows(), grid);
         }
 
-        
-        
-        
-        
-        
-        private Grid MergeTemplateWithFullGrid(Grid template, int height, int width)
+        private static int GetGridWidth(int templateWidth, int configWidth)
         {
-            //handles the min spec stuff
+            return configWidth < templateWidth ? templateWidth : configWidth;
+        }
 
-            var templateHeight = template.GetRows().Count;
-            var templateWidth = template.GetRows()[0].Count;
+        private static int GetGridHeight(int templateHeight, int configHeight)
+        {
+            return configHeight < templateHeight ? templateHeight : configHeight;
+        }
 
-            if (height < templateHeight)
-            {
-                height = templateHeight;
-            }
-
-            if (width < templateWidth)
-            {
-                width = templateWidth;
-            }
+        private static List<List<Cell.Cell>> GenerateEmptyGrid(int width, int height)
+        {
+            var emptyGrid = new List<List<Cell.Cell>>();
             
-            //makes the full grid
-            
-            var fullGrid = new List<List<Cell.Cell>>();
-
             for (var i = 0; i < height; i++)
             {
                 var row = new List<Cell.Cell>();
@@ -53,26 +46,33 @@ namespace GameOfLife.Business.Grid
                     row.Add(new Cell.Cell(CellState.Dead));
                 }
                 
-                fullGrid.Add(row);
+                emptyGrid.Add(row);
             }
+
+            return emptyGrid;
+        }
+
+        private Grid MergeGrids(List<List<Cell.Cell>> template, List<List<Cell.Cell>> grid)
+        {
+            var templateHeight = template.Count;
+            var templateWidth = template[0].Count;
             
-            
-            //merge them
-            var topLeftRowIndex = (height - templateHeight) / 2;
-            var topLeftColumnIndex = (width - templateWidth) / 2;
+            var topLeftRowIndex = (grid.Count - templateHeight) / 2;
+            var topLeftColumnIndex = (grid[0].Count - templateWidth) / 2;
 
             var templateRow = 0;
 
             for (int i = topLeftRowIndex; i < topLeftRowIndex + templateHeight; i++)
             {
-                var row = fullGrid[i];
+                var row = grid[i];
                 row.RemoveRange(topLeftColumnIndex,  templateWidth);
-                row.InsertRange(topLeftColumnIndex, template.GetRows()[templateRow]);
+                row.InsertRange(topLeftColumnIndex, template[templateRow]);
                 templateRow++;
             }
 
-            return new Grid(fullGrid);
+            return new Grid(grid);
         }
+        
         
         
         
