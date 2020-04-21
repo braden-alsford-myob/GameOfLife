@@ -22,12 +22,14 @@ namespace GameOfLife.Business.Grid
             return _rows;
         }
 
-        public void AddTemplateToCenter(List<List<Cell.Cell>> template)
+        public void AddTemplateToCenter(Grid template)
         {
             EnsureGridMinimumSize(template);
+
+            var templateRows = template.GetRows();
             
-            var templateHeight = template.Count;
-            var templateWidth = template[0].Count;
+            var templateHeight = templateRows.Count;
+            var templateWidth = templateRows[0].Count;
             
             var topLeftRowIndex = (_rows.Count - templateHeight) / 2;
             var topLeftColumnIndex = (_rows[0].Count - templateWidth) / 2;
@@ -38,20 +40,20 @@ namespace GameOfLife.Business.Grid
             {
                 var row = _rows[i];
                 row.RemoveRange(topLeftColumnIndex,  templateWidth);
-                row.InsertRange(topLeftColumnIndex, template[currentTemplateRow]);
+                row.InsertRange(topLeftColumnIndex, templateRows[currentTemplateRow]);
                 currentTemplateRow++;
             }
         }
 
-        private void EnsureGridMinimumSize(List<List<Cell.Cell>> template)
+        private void EnsureGridMinimumSize(Grid template)
         {
             EnsureGridMinimumHeight(template);
             EnsureGridMinimumWidth(template);
         }
 
-        private void EnsureGridMinimumHeight(List<List<Cell.Cell>> template)
+        private void EnsureGridMinimumHeight(Grid template)
         {
-            while (_rows.Count < template.Count)
+            while (_rows.Count < template.GetRows().Count)
             {
                 var gridWidth = _rows[0].Count;
                 var newRow = new List<Cell.Cell>();
@@ -65,9 +67,9 @@ namespace GameOfLife.Business.Grid
             }
         }
         
-        private void EnsureGridMinimumWidth(List<List<Cell.Cell>> template)
+        private void EnsureGridMinimumWidth(Grid template)
         {
-            while (_rows[0].Count < template[0].Count)
+            while (_rows[0].Count < template.GetRows()[0].Count)
             {
                 foreach (var row in _rows)
                 {

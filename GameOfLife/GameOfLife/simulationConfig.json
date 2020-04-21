@@ -1,6 +1,6 @@
 {
   "Maximum Generations" : 1000,
-  "Animation Delay" : 50,
+  "Animation Delay" : 100,
   "Grid Type" : "Glider",
   "Rule Set Type": "Basic",
   "Height": 20,

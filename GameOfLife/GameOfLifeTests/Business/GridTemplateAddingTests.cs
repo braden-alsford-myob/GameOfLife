@@ -10,11 +10,11 @@ namespace GameOfLifeTests.Business
         [TestCaseSource(nameof(Grids))]
         public void It_Should_Successfully_Add_The_Template_To_The_Grid(Grid grid, ReadOnlyGrid expected)
         {
-            var template = new List<List<Cell>>
+            var template = new Grid(new List<List<Cell>>
             {
                 new List<Cell>{new Cell(CellState.Alive), new Cell(CellState.Dead)},
                 new List<Cell>{new Cell(CellState.Dead), new Cell(CellState.Alive)} 
-            };
+            });
             
             grid.AddTemplateToCenter(template);
             

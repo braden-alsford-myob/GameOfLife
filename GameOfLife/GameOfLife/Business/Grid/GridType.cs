@@ -3,6 +3,7 @@ namespace GameOfLife.Business.Grid
     public enum GridType
     {
         Glider,
-        Tumbler
+        Tumbler,
+        JohnConway
     }
 }
