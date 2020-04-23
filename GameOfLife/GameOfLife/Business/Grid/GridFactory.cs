@@ -21,7 +21,7 @@ namespace GameOfLife.Business.Grid
                 GridType.Glider => StringTemplateToGridConverter.Convert(GridTemplates.Glider),
                 GridType.Tumbler => StringTemplateToGridConverter.Convert(GridTemplates.Tumbler),
                 GridType.JohnConway => StringTemplateToGridConverter.Convert(GridTemplates.JohnConway),
-                _ => throw new Exception()
+                _ => throw new Exception("Invalid template enum")
             };
         }
     }

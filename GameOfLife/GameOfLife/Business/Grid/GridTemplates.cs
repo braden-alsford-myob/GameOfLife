@@ -14,7 +14,8 @@ namespace GameOfLife.Business.Grid
                                       "000101000\n" +
                                       "010101010\n" +
                                       "010101010\n" +
-                                      "011000110";
+                                      "011000110\n" +
+                                      "000000000";
 
         public const string JohnConway = "000000000\n" +
                                          "000111000\n" +

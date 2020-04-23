@@ -39,7 +39,5 @@ namespace GameOfLife.DataAccess
 
             return new SimulationConfiguration(maxGenerations, animationDelay, gridType, rulesType, height, width);
         }
-
-
     }
 }
