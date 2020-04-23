@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameOfLife.Business.Exceptions;
 using GameOfLife.Business.Requirements;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
@@ -27,6 +28,17 @@ namespace GameOfLifeTests.Business.RuleTests
         {
             var allDeadGrid = GridCreator.GetAllDeadGrid();
             Assert.False(_fourOrMoreActiveNeighboursRequirement.HasMet(allDeadGrid));
+        }
+
+        [Test]
+        public void It_Should_Throw_A_RequirementInvalidException_Given_An_Invalid_Requirement()
+        {
+            void CreateInvalidRequirement()
+            {
+                var invalidRequirement = new ActiveNeighbourRequirement(new HashSet<int>{-1, 10});
+            }
+            
+            Assert.Throws(Is.TypeOf<RequirementInvalidException>(), CreateInvalidRequirement);
         }
     }
 }
