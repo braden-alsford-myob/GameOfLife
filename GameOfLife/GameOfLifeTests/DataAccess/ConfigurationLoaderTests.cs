@@ -7,7 +7,7 @@ using GameOfLife.DataAccess;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace GameOfLifeTests.Business
+namespace GameOfLifeTests.DataAccess
 {
     public class ConfigurationLoaderTests
     {
@@ -22,8 +22,9 @@ namespace GameOfLifeTests.Business
         public void It_Should_Create_A_SimulationConfiguration_Given_A_Valid_Config_file()
         {
             var expected = new SimulationConfiguration(100, 250, GridType.Glider, RuleSetType.Basic, 5, 5);
-
-            var actual = ConfigurationLoader.LoadSimulationConfiguration(ValidFile);
+            var jsonLoader = new JsonConfigurationLoader(ValidFile);
+            
+            var actual = jsonLoader.Load();
 
             Assert.AreEqual(JsonConvert.SerializeObject(expected), JsonConvert.SerializeObject(actual));
         }
@@ -32,9 +33,11 @@ namespace GameOfLifeTests.Business
         [Test]
         public void It_Should_Throw_A_FileNotFoundException_Given_A_Config_That_Doesnt_Exist()
         {
+            var jsonLoader = new JsonConfigurationLoader(NonexistentFile);
+
             void LoadConfiguration()
             {
-                ConfigurationLoader.LoadSimulationConfiguration(NonexistentFile);
+                jsonLoader.Load();
             }
             
             Assert.Throws(Is.TypeOf<FileNotFoundException>(), LoadConfiguration);
@@ -48,9 +51,11 @@ namespace GameOfLifeTests.Business
 
         public void It_Should_Throw_An_InvalidSimulationConfigurationException_Given_Invalid_Config_Files(string path)
         {
+            var jsonLoader = new JsonConfigurationLoader(path);
+
             void LoadConfiguration()
             {
-                ConfigurationLoader.LoadSimulationConfiguration(path);
+                jsonLoader.Load();
             }
 
             Assert.Throws(Is.TypeOf<InvalidSimulationConfigurationException>(), LoadConfiguration);

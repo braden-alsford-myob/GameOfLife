@@ -11,7 +11,9 @@ namespace GameOfLife
         
         static void Main(string[] args)
         {
-            var simulationConfig = ConfigurationLoader.LoadSimulationConfiguration(ConfigFileName);
+            var configLoader = new JsonConfigurationLoader(ConfigFileName);
+
+            var simulationConfig = configLoader.Load();
             var simulation = new Simulation(simulationConfig, new CommandLinePresenter(new Writer()), new Timer());
             simulation.Execute();
         }
