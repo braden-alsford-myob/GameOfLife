@@ -17,6 +17,11 @@ namespace GameOfLife.Business
             _neighbourFinderType = neighbourFinderType;
             _grid = grid;
         }
+        
+        public ReadOnlyGrid GetGrid()
+        {
+            return new ReadOnlyGrid(_grid);
+        }
 
         public void UpdateToNextGeneration()
         {
@@ -30,12 +35,7 @@ namespace GameOfLife.Business
                 }
             }
         }
-
-        public ReadOnlyGrid GetGrid()
-        {
-            return new ReadOnlyGrid(_grid);
-        }
-
+        
         private INeighbourFinder CreateNeighbourFinder()
         {
             return _neighbourFinderType switch
