@@ -1,4 +1,3 @@
-using System;
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
 using GameOfLife.Business.Cell;
