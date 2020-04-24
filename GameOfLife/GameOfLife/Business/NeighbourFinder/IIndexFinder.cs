@@ -3,8 +3,8 @@ using GameOfLife.Business.Grid;
 
 namespace GameOfLife.Business.NeighbourFinder
 {
-    public interface INeighbourFinder
+    public interface IIndexFinder
     {
-        public ReadOnlyGrid GetThreeByThreeGridAroundCell(CellPosition cellPosition);
+        public IndexSet GetIndexSet(ReadOnlyGrid grid, CellPosition cellPosition);
     }
 }

@@ -28,7 +28,7 @@ namespace GameOfLife.Business
             var ruleSetFactory = new RuleSetFactory();
             var ruleset = ruleSetFactory.Create(config.RuleSetType);
             
-            _board = new Board(ruleset, NeighbourFinderType.EdgeWrapping, grid);
+            _board = new Board(ruleset, grid);
         }
 
         public void Execute()

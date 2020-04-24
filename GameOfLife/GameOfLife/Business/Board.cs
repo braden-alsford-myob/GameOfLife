@@ -1,4 +1,3 @@
-using System;
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 using GameOfLife.Business.NeighbourFinder;
@@ -8,13 +7,11 @@ namespace GameOfLife.Business
     public class Board
     {
         private readonly RuleSet.RuleSet _ruleset;
-        private readonly NeighbourFinderType _neighbourFinderType;
         private readonly Grid.Grid _grid;
 
-        public Board(RuleSet.RuleSet ruleset, NeighbourFinderType neighbourFinderType, Grid.Grid grid)
+        public Board(RuleSet.RuleSet ruleset, Grid.Grid grid)
         {
             _ruleset = ruleset;
-            _neighbourFinderType = neighbourFinderType;
             _grid = grid;
         }
         
@@ -25,7 +22,8 @@ namespace GameOfLife.Business
 
         public void UpdateToNextGeneration()
         {
-            var neighbourFinder = CreateNeighbourFinder();
+            var indexFinder = new EdgeWrappingIndexFinder();
+            var neighbourFinder = new NeighbourFinder.NeighbourFinder(GetGrid(), indexFinder);
             
             for (var i = 0; i < _grid.GetRows().Count; i++)
             {
@@ -35,17 +33,8 @@ namespace GameOfLife.Business
                 }
             }
         }
-        
-        private INeighbourFinder CreateNeighbourFinder()
-        {
-            return _neighbourFinderType switch
-            {
-                NeighbourFinderType.EdgeWrapping => new EdgeWrappingNeighbourFinder(GetGrid()),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
 
-        private void UpdateCellState(CellPosition position, INeighbourFinder finder)
+        private void UpdateCellState(CellPosition position, NeighbourFinder.NeighbourFinder finder)
         {
             var neighbours = finder.GetThreeByThreeGridAroundCell(position);
             var newState = _ruleset.GetNextCellState(neighbours);
