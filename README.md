@@ -4,6 +4,10 @@ Interpretation of Conway's Game Of Life - a virtual simulation on the simplicity
 
 ![](Glider.gif)
 
+## Architecture
+The mostly full UML diagram can be found [here](UML Diagram.png).
+Unfortunately, it isn't fully complete as I needed a LucidChart subscription to add more boxes! (It is missing the factory internals)
+
 ## Running the application
 Once access rights to the repository have been granted you can install and run Game of Life as follows:
 
