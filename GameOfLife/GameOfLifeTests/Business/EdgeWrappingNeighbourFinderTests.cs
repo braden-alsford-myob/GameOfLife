@@ -7,13 +7,14 @@ namespace GameOfLifeTests.Business
 {
     public class EdgeWrappingNeighbourFinderTests
     {
-        private EdgeWrappingNeighbourFinder _edgeWrappingNeighbourFinder;
+        private NeighbourFinder _edgeWrappingNeighbourFinder;
         
         [SetUp]
         public void Setup()
         {
             var aliveReadOnlyCenterCellGrid = Helpers.GridCreator.GetAliveTopLeftGrid();
-            _edgeWrappingNeighbourFinder = new EdgeWrappingNeighbourFinder(aliveReadOnlyCenterCellGrid);
+            var edgeWrappingIndexFinder = new EdgeWrappingIndexFinder();
+            _edgeWrappingNeighbourFinder = new NeighbourFinder(aliveReadOnlyCenterCellGrid, edgeWrappingIndexFinder);
         }
 
         

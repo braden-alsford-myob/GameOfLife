@@ -10,13 +10,11 @@ namespace GameOfLifeTests.Business
     public class BoardTests
     {
         private RuleSet _basicRuleSet;
-        private NeighbourFinderType _neighbourFinderType;
 
         [SetUp]
         public void Setup()
         {
             _basicRuleSet = new RuleSetFactory().Create(RuleSetType.Basic);
-            _neighbourFinderType = NeighbourFinderType.EdgeWrapping;
         }
         
 
@@ -29,7 +27,7 @@ namespace GameOfLifeTests.Business
         {
             var grid = BasicGliderFrameCreator.GetFrame(startingFrame);
 
-            var board = new Board(_basicRuleSet, _neighbourFinderType, grid);
+            var board = new Board(_basicRuleSet, grid);
             board.UpdateToNextGeneration();
             var expectedGrid = new ReadOnlyGrid(BasicGliderFrameCreator.GetFrame(expectedFrame));
             var actualGrid = board.GetGrid();
