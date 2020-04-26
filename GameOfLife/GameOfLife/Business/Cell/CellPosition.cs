@@ -2,8 +2,8 @@ namespace GameOfLife.Business.Cell
 {
     public class CellPosition
     {
-        public int Row { get; private set; }
-        public int Column { get; private set; }
+        public int Row { get; }
+        public int Column { get; }
 
         public CellPosition(int row, int column)
         {

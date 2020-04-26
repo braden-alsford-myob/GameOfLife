@@ -2,6 +2,6 @@ namespace GameOfLife.Business.Timer
 {
     public interface ITimer
     {
-        public void Sleep(int time);
+        void Sleep(int time);
     }
 }

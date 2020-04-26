@@ -4,6 +4,6 @@ namespace GameOfLife.Presentation
 {
     public interface IPresenter
     {
-        public void Display(GenerationViewModel generation);
+        void Display(GenerationViewModel generation);
     }
 }

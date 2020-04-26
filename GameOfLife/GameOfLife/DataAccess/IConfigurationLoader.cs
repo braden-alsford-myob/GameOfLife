@@ -4,6 +4,6 @@ namespace GameOfLife.DataAccess
 {
     public interface IConfigurationLoader
     {
-        public SimulationConfiguration Load();
+        SimulationConfiguration Load();
     }
 }

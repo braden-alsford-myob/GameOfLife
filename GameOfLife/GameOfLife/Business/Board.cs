@@ -1,6 +1,6 @@
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
-using GameOfLife.Business.NeighbourFinder;
+using GameOfLife.Business.NeighbourFinderPieces;
 
 namespace GameOfLife.Business
 {
@@ -23,7 +23,7 @@ namespace GameOfLife.Business
         public void UpdateToNextGeneration()
         {
             var indexFinder = new EdgeWrappingIndexFinder();
-            var neighbourFinder = new NeighbourFinder.NeighbourFinder(GetGrid(), indexFinder);
+            var neighbourFinder = new NeighbourFinder(GetGrid(), indexFinder);
             
             for (var i = 0; i < _grid.GetRows().Count; i++)
             {
@@ -34,7 +34,7 @@ namespace GameOfLife.Business
             }
         }
 
-        private void UpdateCellState(CellPosition position, NeighbourFinder.NeighbourFinder finder)
+        private void UpdateCellState(CellPosition position, NeighbourFinder finder)
         {
             var neighbours = finder.GetThreeByThreeGridAroundCell(position);
             var newState = _ruleset.GetNextCellState(neighbours);

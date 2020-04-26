@@ -4,6 +4,6 @@ namespace GameOfLife.Business.Requirements
 {
     public interface IRequirement
     {
-        public bool HasMet(ReadOnlyGrid concernedCells);
+        bool HasMet(ReadOnlyGrid concernedCells);
     }
 }

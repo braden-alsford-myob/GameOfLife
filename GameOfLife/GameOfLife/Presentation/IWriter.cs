@@ -2,7 +2,7 @@ namespace GameOfLife.Presentation
 {
     public interface IWriter
     {
-        public void WriteLine(string content);
-        public void Clear();
+        void WriteLine(string content);
+        void Clear();
     }
 }

@@ -1,6 +1,5 @@
 using GameOfLife.Business;
 using GameOfLife.Business.Grid;
-using GameOfLife.Business.NeighbourFinder;
 using GameOfLife.Business.RuleSet;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;

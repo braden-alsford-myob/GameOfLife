@@ -1,7 +1,7 @@
 using GameOfLife.Business.Cell;
 using GameOfLife.Business.Grid;
 
-namespace GameOfLife.Business.NeighbourFinder
+namespace GameOfLife.Business.NeighbourFinderPieces
 {
     public class EdgeWrappingIndexFinder : IIndexFinder
     {

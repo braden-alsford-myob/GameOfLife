@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife.Business.Cell;
-using GameOfLife.Business.NeighbourFinder;
+using GameOfLife.Business.NeighbourFinderPieces;
 using NUnit.Framework;
 
 namespace GameOfLifeTests.Business
