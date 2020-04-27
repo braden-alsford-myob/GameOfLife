@@ -13,7 +13,7 @@ namespace GameOfLifeTests.Business
         [SetUp]
         public void Setup()
         {
-            _basicRuleSet = new RuleSetFactory().Create(RuleSetType.Basic);
+            _basicRuleSet = new RuleSetFactory().Create(RuleSetType.Standard);
         }
         
 
