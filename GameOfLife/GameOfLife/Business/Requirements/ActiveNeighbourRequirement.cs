@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameOfLife.Business.Cell;
+using GameOfLife.Business.CellObjects;
 using GameOfLife.Business.Exceptions;
-using GameOfLife.Business.Grid;
+using GameOfLife.Business.GridObjects;
 
 namespace GameOfLife.Business.Requirements
 {

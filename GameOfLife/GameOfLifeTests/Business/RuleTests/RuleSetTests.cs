@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Cell;
-using GameOfLife.Business.Grid;
+using GameOfLife.Business.CellObjects;
+using GameOfLife.Business.GridObjects;
 using GameOfLife.Business.Requirements;
-using GameOfLife.Business.RuleSet;
+using GameOfLife.Business.RuleSetObjects;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 

@@ -1,4 +1,4 @@
-using GameOfLife.Business.Grid;
+using GameOfLife.Business.GridObjects;
 
 namespace GameOfLife.Business
 {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Grid;
 using GameOfLife.Presentation;
 using GameOfLifeTests.Helpers;
 using Moq;

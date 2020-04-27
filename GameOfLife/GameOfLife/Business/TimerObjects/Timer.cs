@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace GameOfLife.Business.Timer
+namespace GameOfLife.Business.TimerObjects
 {
     public class Timer : ITimer
     {

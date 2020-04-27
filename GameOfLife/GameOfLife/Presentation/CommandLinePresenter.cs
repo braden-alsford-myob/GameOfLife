@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
-using GameOfLife.Business.Cell;
+using GameOfLife.Business.CellObjects;
 
 namespace GameOfLife.Presentation
 {

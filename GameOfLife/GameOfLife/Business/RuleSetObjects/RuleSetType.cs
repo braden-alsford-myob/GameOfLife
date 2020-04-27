@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.RuleSet
+namespace GameOfLife.Business.RuleSetObjects
 {
     public enum RuleSetType
     {

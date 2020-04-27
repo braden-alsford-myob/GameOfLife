@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Cell;
-using GameOfLife.Business.Grid;
+using GameOfLife.Business.GridObjects;
 using GameOfLifeTests.Helpers;
 using NUnit.Framework;
 

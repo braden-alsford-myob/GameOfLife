@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using GameOfLife.Business.Cell;
+using GameOfLife.Business.CellObjects;
 
-namespace GameOfLife.Business.Grid
+namespace GameOfLife.Business.GridObjects
 {
     public class ReadOnlyGrid
     {

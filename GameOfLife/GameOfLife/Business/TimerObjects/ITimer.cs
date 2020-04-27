@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.Timer
+namespace GameOfLife.Business.TimerObjects
 {
     public interface ITimer
     {

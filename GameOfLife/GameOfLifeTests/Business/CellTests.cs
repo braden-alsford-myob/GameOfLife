@@ -1,4 +1,4 @@
-using GameOfLife.Business.Cell;
+using GameOfLife.Business.CellObjects;
 using NUnit.Framework;
 
 namespace GameOfLifeTests.Business

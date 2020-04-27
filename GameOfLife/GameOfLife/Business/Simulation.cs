@@ -1,6 +1,6 @@
-using GameOfLife.Business.Grid;
-using GameOfLife.Business.RuleSet;
-using GameOfLife.Business.Timer;
+using GameOfLife.Business.GridObjects;
+using GameOfLife.Business.RuleSetObjects;
+using GameOfLife.Business.TimerObjects;
 using GameOfLife.Presentation;
 
 namespace GameOfLife.Business

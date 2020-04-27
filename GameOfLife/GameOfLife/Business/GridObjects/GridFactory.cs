@@ -1,6 +1,6 @@
 using System;
 
-namespace GameOfLife.Business.Grid
+namespace GameOfLife.Business.GridObjects
 {
     public class GridFactory
     {

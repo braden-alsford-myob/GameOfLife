@@ -1,5 +1,5 @@
 ﻿using GameOfLife.Business;
-using GameOfLife.Business.Timer;
+using GameOfLife.Business.TimerObjects;
 using GameOfLife.DataAccess;
 using GameOfLife.Presentation;
 

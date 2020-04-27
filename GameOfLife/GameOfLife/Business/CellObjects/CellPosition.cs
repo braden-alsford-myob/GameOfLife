@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.Cell
+namespace GameOfLife.Business.CellObjects
 {
     public class CellPosition
     {

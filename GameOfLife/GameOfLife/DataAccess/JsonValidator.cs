@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using GameOfLife.Business.Exceptions;
-using GameOfLife.Business.Grid;
-using GameOfLife.Business.RuleSet;
+using GameOfLife.Business.GridObjects;
+using GameOfLife.Business.RuleSetObjects;
 using Microsoft.Extensions.Configuration;
 
 namespace GameOfLife.DataAccess

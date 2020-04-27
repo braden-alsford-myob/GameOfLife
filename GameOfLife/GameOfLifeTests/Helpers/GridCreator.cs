@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GameOfLife.Business;
-using GameOfLife.Business.Cell;
-using GameOfLife.Business.Grid;
+using GameOfLife.Business.CellObjects;
+using GameOfLife.Business.GridObjects;
 
 namespace GameOfLifeTests.Helpers
 {

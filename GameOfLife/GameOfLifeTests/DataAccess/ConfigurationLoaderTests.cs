@@ -1,8 +1,8 @@
 using System.IO;
 using GameOfLife.Business;
 using GameOfLife.Business.Exceptions;
-using GameOfLife.Business.Grid;
-using GameOfLife.Business.RuleSet;
+using GameOfLife.Business.GridObjects;
+using GameOfLife.Business.RuleSetObjects;
 using GameOfLife.DataAccess;
 using Newtonsoft.Json;
 using NUnit.Framework;

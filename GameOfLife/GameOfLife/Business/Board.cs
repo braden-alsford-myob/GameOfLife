@@ -1,15 +1,16 @@
-using GameOfLife.Business.Cell;
-using GameOfLife.Business.Grid;
-using GameOfLife.Business.NeighbourFinderPieces;
+using GameOfLife.Business.CellObjects;
+using GameOfLife.Business.GridObjects;
+using GameOfLife.Business.NeighbourFinderObjects;
+using GameOfLife.Business.RuleSetObjects;
 
 namespace GameOfLife.Business
 {
     public class Board
     {
-        private readonly RuleSet.RuleSet _ruleset;
-        private readonly Grid.Grid _grid;
+        private readonly RuleSet _ruleset;
+        private readonly Grid _grid;
 
-        public Board(RuleSet.RuleSet ruleset, Grid.Grid grid)
+        public Board(RuleSet ruleset, Grid grid)
         {
             _ruleset = ruleset;
             _grid = grid;

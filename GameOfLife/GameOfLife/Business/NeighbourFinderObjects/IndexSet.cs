@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.NeighbourFinderPieces
+namespace GameOfLife.Business.NeighbourFinderObjects
  {
      public class IndexSet
      {

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using GameOfLife.Business.Cell;
+using GameOfLife.Business.CellObjects;
 
-namespace GameOfLife.Business.Grid
+namespace GameOfLife.Business.GridObjects
 {
     public class Grid
     {
-        private readonly List<List<Cell.Cell>> _rows;
+        private readonly List<List<Cell>> _rows;
 
-        public Grid(List<List<Cell.Cell>> rows)
+        public Grid(List<List<Cell>> rows)
         {
             _rows = rows;
         }
@@ -17,7 +17,7 @@ namespace GameOfLife.Business.Grid
             _rows = GenerateRows(height, width);
         }
 
-        public List<List<Cell.Cell>> GetRows()
+        public List<List<Cell>> GetRows()
         {
             return _rows;
         }
@@ -56,11 +56,11 @@ namespace GameOfLife.Business.Grid
             while (_rows.Count < template.GetRows().Count)
             {
                 var gridWidth = _rows[0].Count;
-                var newRow = new List<Cell.Cell>();
+                var newRow = new List<Cell>();
 
                 for (var i = 0; i < gridWidth; i++)
                 {
-                    newRow.Add(new Cell.Cell(CellState.Dead));
+                    newRow.Add(new Cell(CellState.Dead));
                 }
                 
                 _rows.Add(newRow);
@@ -73,22 +73,22 @@ namespace GameOfLife.Business.Grid
             {
                 foreach (var row in _rows)
                 {
-                   row.Add(new Cell.Cell(CellState.Dead));
+                   row.Add(new Cell(CellState.Dead));
                 }
             }
         }
 
-        private List<List<Cell.Cell>> GenerateRows(int height, int width)
+        private List<List<Cell>> GenerateRows(int height, int width)
         {
-            var rows = new List<List<Cell.Cell>>();
+            var rows = new List<List<Cell>>();
             
             for (var i = 0; i < height; i++)
             {
-                var row = new List<Cell.Cell>();
+                var row = new List<Cell>();
 
                 for (var j = 0; j < width; j++)
                 {
-                    row.Add(new Cell.Cell(CellState.Dead));
+                    row.Add(new Cell(CellState.Dead));
                 }
                 
                 rows.Add(row);

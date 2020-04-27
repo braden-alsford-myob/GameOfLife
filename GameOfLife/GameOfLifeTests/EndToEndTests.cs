@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using GameOfLife.Business;
-using GameOfLife.Business.Grid;
-using GameOfLife.Business.RuleSet;
-using GameOfLife.Business.Timer;
+using GameOfLife.Business.GridObjects;
+using GameOfLife.Business.RuleSetObjects;
+using GameOfLife.Business.TimerObjects;
 using GameOfLife.Presentation;
 using Moq;
 using NUnit.Framework;

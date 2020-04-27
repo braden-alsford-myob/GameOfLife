@@ -1,4 +1,4 @@
-namespace GameOfLife.Business.Grid
+namespace GameOfLife.Business.GridObjects
 {
     public enum GridType
     {
