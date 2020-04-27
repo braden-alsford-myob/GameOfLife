@@ -1,7 +1,7 @@
 {
   "Maximum Generations" : 100,
   "Animation Delay" : 250,
-  "Grid Type" : "Glider",
+  "Grid Type" : "Tumbler",
   "Rule Set Type": "Standard",
   "Height": 10,
   "Width": 10

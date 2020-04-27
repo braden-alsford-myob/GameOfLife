@@ -11,18 +11,23 @@ namespace GameOfLife.Business.GridObjects
 
             foreach (var row in template.Split('\n'))
             {
-                var convertedRow = new List<Cell>();
-
-                foreach (var cell in row)
-                { 
-                    var convertedCell = cell == '0' ? new Cell(CellState.Dead) : new Cell(CellState.Alive);
-                    convertedRow.Add(convertedCell);
-                }
-                
-                convertedTemplate.Add(convertedRow);
+                convertedTemplate.Add(GetConvertedRow(row));
             }
 
             return new Grid(convertedTemplate);
+        }
+
+        private static List<Cell> GetConvertedRow(string row)
+        {
+            var convertedRow = new List<Cell>();
+
+            foreach (var cell in row)
+            { 
+                var convertedCell = cell == '0' ? new Cell(CellState.Dead) : new Cell(CellState.Alive);
+                convertedRow.Add(convertedCell);
+            }
+
+            return convertedRow;
         }
     }
 }
