@@ -21,7 +21,7 @@ namespace GameOfLifeTests.DataAccess
         [Test]
         public void It_Should_Create_A_SimulationConfiguration_Given_A_Valid_Config_file()
         {
-            var expected = new SimulationConfiguration(100, 250, GridType.Glider, RuleSetType.Basic, 5, 5);
+            var expected = new SimulationConfiguration(100, 250, GridType.Glider, RuleSetType.Standard, 5, 5);
             var jsonLoader = new JsonConfigurationLoader(ValidFile);
             
             var actual = jsonLoader.Load();

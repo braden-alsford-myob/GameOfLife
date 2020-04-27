@@ -2,7 +2,7 @@
   "Maximum Generations" : 100,
   "Animation Delay" : 250,
   "Grid Type" : "Not a valid type",
-  "Rule Set Type": "Basic",
+  "Rule Set Type": "Standard",
   "Height": 5,
   "Width": 5
 }

@@ -11,12 +11,13 @@ namespace GameOfLife.Business.RuleSetObjects
         {
             return type switch
             {
-                RuleSetType.Basic => GetBasicRuleSet(),
+                RuleSetType.Standard => GetStandardRuleSet(),
+                RuleSetType.EasyReproduction => GetEasyReproductionRuleSet(),
                 _ => throw new Exception()
             };
         }
         
-        private static RuleSet GetBasicRuleSet()
+        private static RuleSet GetStandardRuleSet()
         {
             var basicRules = new Dictionary<int, Rule>
             {
@@ -28,6 +29,18 @@ namespace GameOfLife.Business.RuleSetObjects
             return new RuleSet(basicRules);
         }
         
+        private static RuleSet GetEasyReproductionRuleSet()
+        {
+            var basicRules = new Dictionary<int, Rule>
+            {
+                {1, GetEasyReproductionRule()},
+                {2, GetOvercrowdingRule()},
+                {3, GetUnderpopulationRule()}
+            };
+            
+            return new RuleSet(basicRules);
+        }
+
         private static Rule GetOvercrowdingRule()
         {
             var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Alive});
@@ -48,11 +61,21 @@ namespace GameOfLife.Business.RuleSetObjects
 
         private static Rule GetReproductionRule()
         {
-            var cellAliveRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Dead});
+            var cellDeadRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Dead});
             var threeNeighbourRequirements = new ActiveNeighbourRequirement(new HashSet<int>{3});
-            var requirements = new List<IRequirement> {cellAliveRequirement, threeNeighbourRequirements};
+            var requirements = new List<IRequirement> {cellDeadRequirement, threeNeighbourRequirements};
             
             return new Rule(requirements, CellState.Alive);
         }
+
+        private static Rule GetEasyReproductionRule()
+        {
+            var cellDeadRequirement = new InitialStateRequirement(new HashSet<CellState>{CellState.Dead});
+            var threeNeighbourRequirements = new ActiveNeighbourRequirement(new HashSet<int>{2, 3});
+            var requirements = new List<IRequirement> {cellDeadRequirement, threeNeighbourRequirements};
+            
+            return new Rule(requirements, CellState.Alive);
+        }
+
     }
 }
